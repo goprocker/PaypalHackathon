@@ -84,6 +84,34 @@ export async function captureOrder(id: string, expected: { amountCents: number; 
   return call<PayPalOrder>(`/v2/checkout/orders/${encodeURIComponent(id)}/capture`, { method: "POST", requestId: `cap-${id}` });
 }
 
+const WEBHOOK_HEADERS = ["paypal-auth-algo", "paypal-cert-url", "paypal-transmission-id", "paypal-transmission-sig", "paypal-transmission-time"] as const;
+
+/** Asks PayPal to verify a webhook delivery. False without keys or a webhook id: unverified events are never trusted. */
+export async function verifyWebhook(headers: Headers, rawBody: string): Promise<boolean> {
+  const webhookId = process.env.PAYPAL_WEBHOOK_ID;
+  if (paypalMock() || !webhookId) return false;
+  const h = WEBHOOK_HEADERS.map((k) => headers.get(k));
+  if (h.some((v) => !v)) return false;
+  // rawBody is spliced in verbatim, so it must be exactly one JSON object (no extra keys smuggled in).
+  try {
+    const parsed: unknown = JSON.parse(rawBody);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return false;
+  } catch {
+    return false;
+  }
+  const [auth_algo, cert_url, transmission_id, transmission_sig, transmission_time] = h;
+  try {
+    const res = await call<{ verification_status: string }>("/v1/notifications/verify-webhook-signature", {
+      method: "POST",
+      // webhook_event must be the exact parsed body PayPal sent.
+      body: `{"auth_algo":${JSON.stringify(auth_algo)},"cert_url":${JSON.stringify(cert_url)},"transmission_id":${JSON.stringify(transmission_id)},"transmission_sig":${JSON.stringify(transmission_sig)},"transmission_time":${JSON.stringify(transmission_time)},"webhook_id":${JSON.stringify(webhookId)},"webhook_event":${rawBody}}`,
+    });
+    return res.verification_status === "SUCCESS";
+  } catch {
+    return false;
+  }
+}
+
 /** True only if the order's amount exactly matches what the server stored. */
 export function amountMatches(order: PayPalOrder, expected: { amountCents: number; currency: string }): boolean {
   const a = order.purchase_units?.[0]?.amount;
