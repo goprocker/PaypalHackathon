@@ -60,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full">
-        <div className="app-shell flex flex-col pb-28">
+        <div className="app-shell flex flex-col pb-28 max-md:pb-42">
           <Suspense fallback={<div className="h-16" />}>
             <TopBar />
           </Suspense>

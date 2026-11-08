@@ -31,7 +31,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-40 mx-auto flex w-full max-w-[480px] items-end border-t border-border bg-surface/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur"
+      className="fixed inset-x-0 bottom-0 z-40 mx-auto flex w-full max-w-[480px] items-end border-t border-border bg-surface/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur max-md:pb-[calc(env(safe-area-inset-bottom)+3.5rem)]"
     >
       {item(SIDE[0])}
       {item(SIDE[1])}

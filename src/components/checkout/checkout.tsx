@@ -79,8 +79,8 @@ export function Checkout({ mock, clientId }: { mock: boolean; clientId: string }
             {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
           </Select>
         </Label>
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={form.includeDuty} onChange={set("includeDuty")} className="size-4 accent-[var(--accent)]" />
+        <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
+          <input type="checkbox" checked={form.includeDuty} onChange={set("includeDuty")} className="size-5 accent-[var(--accent)]" />
           Add an import duty estimate
         </label>
         <Button disabled={loading} size="lg" className="w-full">
