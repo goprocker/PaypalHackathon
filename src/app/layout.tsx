@@ -41,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="sticky top-0 z-40 border-b border-border bg-surface/80 backdrop-blur">
           <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-4 px-4 py-3">
             <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-              <span className="grid size-8 place-items-center rounded-md bg-accent text-white"><Wallet aria-hidden className="size-4" /></span>
+              <span className="grid size-8 place-items-center rounded-md bg-accent text-on-accent"><Wallet aria-hidden className="size-4" /></span>
               PayHub AI
             </Link>
             <Suspense fallback={null}>

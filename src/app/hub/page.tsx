@@ -47,7 +47,7 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
               role="tab"
               aria-selected={view === v}
               href={`/hub?view=${v}`}
-              className={cn("flex h-8 items-center rounded-md px-4 font-medium", view === v ? "bg-surface shadow-sm" : "text-muted hover:text-text")}
+              className={cn("flex h-11 items-center rounded-md px-4 sm:h-8 font-medium", view === v ? "bg-surface shadow-sm" : "text-muted hover:text-text")}
             >
               {v === "individual" ? "Just me" : "Whole family"}
             </Link>

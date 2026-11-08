@@ -12,9 +12,12 @@
   --primary-fg: #ffffff;
   --accent: #0f7a64;
   --good: #0f7a64;
-  --warn: #b57708;
+  --warn: #8f5e00;
   --bad: #c0352b;
   --private: #6a4cc0;
+  --on-accent: #ffffff;
+  --cat-groceries: #0f7a64; --cat-bills: #3a4a8c; --cat-shopping: #c2557a; --cat-food: #d9920f;
+  --cat-subscriptions: #c0352b; --cat-friends: #2a9db0; --cat-other: #8a91a8; --cat-personal: #6a4cc0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,6 +35,9 @@
     --warn: #f0b33a;
     --bad: #f07a6f;
     --private: #a990f2;
+    --on-accent: #0e1330;
+    --cat-groceries: #3cc8a6; --cat-bills: #8f9ce0; --cat-shopping: #e585a8; --cat-food: #f0b33a;
+    --cat-subscriptions: #f07a6f; --cat-friends: #5cc6d8; --cat-other: #9aa3c7; --cat-personal: #a990f2;
   }
 }
 
@@ -45,6 +51,7 @@
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
   --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
   --color-good: var(--good);
   --color-warn: var(--warn);
   --color-bad: var(--bad);
@@ -68,5 +75,7 @@ h1, h2 { letter-spacing: -0.02em; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  /* Keep colour transitions and the spinner (state feedback); drop movement. */
+  *:not(.animate-spin) { animation: none !important; scroll-behavior: auto !important; }
+  .animate-spin { animation-duration: 2s; }
 }

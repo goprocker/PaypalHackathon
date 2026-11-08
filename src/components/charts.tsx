@@ -4,8 +4,8 @@ import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis
 import { formatInr } from "@/lib/truecost";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Groceries: "#0F7A64", Bills: "#3A4A8C", Shopping: "#C2557A", Food: "#D9920F",
-  Subscriptions: "#C0352B", Friends: "#2A9DB0", Other: "#8A91A8", Personal: "#6A4CC0",
+  Groceries: "var(--cat-groceries)", Bills: "var(--cat-bills)", Shopping: "var(--cat-shopping)", Food: "var(--cat-food)",
+  Subscriptions: "var(--cat-subscriptions)", Friends: "var(--cat-friends)", Other: "var(--cat-other)", Personal: "var(--cat-personal)",
 };
 
 const tooltip = (v: unknown) => formatInr(Number(v));
@@ -19,7 +19,7 @@ export function CategoryDonut({ data }: { data: { category: string; paise: numbe
         <ResponsiveContainer>
           <PieChart>
             <Pie data={data} dataKey="paise" nameKey="category" innerRadius="60%" outerRadius="100%" strokeWidth={2} isAnimationActive={false}>
-              {data.map((d) => <Cell key={d.category} fill={CATEGORY_COLORS[d.category] ?? "#6B7280"} />)}
+              {data.map((d) => <Cell key={d.category} fill={CATEGORY_COLORS[d.category] ?? "var(--cat-other)"} />)}
             </Pie>
             <Tooltip formatter={tooltip} />
           </PieChart>
@@ -28,7 +28,7 @@ export function CategoryDonut({ data }: { data: { category: string; paise: numbe
       <ul className="w-full space-y-1 text-sm">
         {data.map((d) => (
           <li key={d.category} className="flex items-center gap-2">
-            <span aria-hidden className="size-3 rounded-full" style={{ background: CATEGORY_COLORS[d.category] ?? "#6B7280" }} />
+            <span aria-hidden className="size-3 rounded-full" style={{ background: CATEGORY_COLORS[d.category] ?? "var(--cat-other)" }} />
             <span className="flex-1">{d.category}</span>
             <span className="tabular text-muted">{Math.round((d.paise / total) * 100)}%</span>
             <span className="tabular w-20 text-right">{formatInr(d.paise)}</span>

@@ -21,7 +21,7 @@ export function NavLinks() {
           href={href}
           aria-current={path === href ? "page" : undefined}
           className={cn(
-            "flex h-8 items-center gap-1.5 rounded-md px-3 font-medium text-muted transition-colors hover:text-text",
+            "flex h-11 items-center gap-1.5 sm:h-8 rounded-md px-3 font-medium text-muted transition-colors hover:text-text",
             path === href && "bg-surface text-text shadow-sm",
           )}
         >

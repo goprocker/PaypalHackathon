@@ -48,7 +48,7 @@ export function PayButton({ mock, clientId, payload, onPaid }: Props) {
               setBusy(false);
             }
           }}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-accent text-sm font-medium text-white hover:bg-accent/90 disabled:opacity-60"
+          className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-accent text-sm font-medium text-on-accent hover:bg-accent/90 disabled:opacity-60"
         >
           {busy ? <Loader2 aria-hidden className="size-4 animate-spin" /> : <Lock aria-hidden className="size-4" />}
           {busy ? "Paying" : "Pay with mock PayPal"}
