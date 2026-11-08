@@ -48,15 +48,17 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 
 ## Session Handoff (2026-11-08)
 
-**State:** H0–H8 done, committed locally (no remote yet). Mock mode works end to end. Context used ~13% (128k/1M).
+**State:** H0–H10 done, committed locally (no remote yet). Mock mode works end to end. Context used ~13% (128k/1M).
 
 **Commits (local git, `master`)**
 - `85f489f` scaffold Next.js 16 + deps
 - `b3c4adf` true cost, FX, trust score, AI verdict API
 - `3710866` PayPal checkout (orders/capture), tag sheet, proof receipt, DB + seed, demo login
 - `8e8c8a8` privacy.ts + Money Hub (`/hub`)
+- `50dcfee` chat agent (`/api/ai/chat`, `/chat`), tools read via `familyMonth`/`shapeForViewer`, rule fallback
+- `61950e3` `/api/paypal/webhook` with verify-webhook-signature; unverified → 401
 
-**How to run:** `npm install` → `npm run setup` (db push + seed) → `npx next dev`. Checks: `npm test` (25 pass), `npm run typecheck`, `npx eslint src tests scripts`, `npm run build`.
+**How to run:** `npm install` → `npm run setup` (db push + seed) → `npx next dev`. Checks: `npm test` (36 pass), `npm run typecheck`, `npx eslint src tests scripts`, `npm run build`.
 
 **Decisions made**
 - 1-day MVP vertical slice; everything else cut.
@@ -66,6 +68,7 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - PayPal JS SDK v6 via `@paypal/react-paypal-js/sdk-v6` (`PayPalProvider` + `PayPalOneTimePaymentButton`).
 - Next 16 `cacheComponents` is on: cookie reads wrapped in `<Suspense>` in layout; pages using `new Date()` call `await connection()`.
 - Untagged txns treated as Private for other members (PRD silent).
+- Chat replies are JSON, not streamed (simpler; revisit if time).
 - Commits carry both Co-authored-by (Gopinath2638) and Claude trailers.
 
 **Verified**
@@ -73,7 +76,7 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Privacy on dev server: Mom's family view hides my private items as "Personal – Other".
 
 **Not verified**
-- Real PayPal sandbox payment and real Claude calls (no keys yet).
+- Real PayPal sandbox payment, real Claude calls (verdict + chat tool loop), real webhook delivery (no keys yet).
 - UI in a real browser (layout, mobile, dark mode, chart rendering).
 
 **Open items**
@@ -82,6 +85,6 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Seed has 30 txns this month only (PRD wants ~60 over two months + one failed payment); fine for MVP.
 - Add git remote and push when user gives repo URL.
 
-**Next step:** H8–10: chat agent (`/api/ai/chat`, Claude tool use with `get_transactions`, `calculate_true_cost`, `budget_summary`, finance-only prompt, streaming, rule fallback; tools must read through `familyMonth`/`shapeForViewer`) + `/chat` page; then `/api/paypal/webhook` with `verify-webhook-signature` and a rejection unit test. Then H10–12 deploy (Vercel + Turso).
+**Next step:** H10–12 deploy (Vercel + Turso), register webhook URL in PayPal sandbox, then real-key smoke test + browser UI check.
 
 **Notes:** AGENTS.md asks for caveman-style chat replies and Conventional Commits with the specified Co-authored-by trailer.
