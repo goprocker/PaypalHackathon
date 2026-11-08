@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T15:59:14.542Z",
+  "title": "Design System: PayHub AI",
+  "extensions": {
+    "colorMeta": {
+      "ink-indigo": {
+        "role": "primary",
+        "displayName": "Ink Indigo",
+        "canonical": "#1b2559",
+        "tonalRamp": [
+          "#0e1430",
+          "#12193b",
+          "#151d47",
+          "#192252",
+          "#4b537c",
+          "#7a819f",
+          "#aaafc3",
+          "#d9dce6"
+        ]
+      },
+      "banknote-teal": {
+        "role": "secondary",
+        "displayName": "Banknote Teal",
+        "canonical": "#0f7a64",
+        "tonalRamp": [
+          "#0c2632",
+          "#0d3e40",
+          "#0e554e",
+          "#0e6c5c",
+          "#419585",
+          "#73b1a6",
+          "#a6ccc6",
+          "#d8e8e7"
+        ]
+      },
+      "marigold": {
+        "role": "tertiary",
+        "displayName": "Marigold",
+        "canonical": "#b57708",
+        "tonalRamp": [
+          "#30261e",
+          "#553c18",
+          "#7a5312",
+          "#9f690c",
+          "#c3933d",
+          "#d1af72",
+          "#dfcba6",
+          "#eee7db"
+        ]
+      },
+      "sindoor": {
+        "role": "tertiary",
+        "displayName": "Sindoor",
+        "canonical": "#c0352b",
+        "tonalRamp": [
+          "#321726",
+          "#5a2027",
+          "#812829",
+          "#a8302a",
+          "#cc5f58",
+          "#d78a85",
+          "#e3b4b3",
+          "#efdfe0"
+        ]
+      },
+      "lavender-private": {
+        "role": "tertiary",
+        "displayName": "Lavender Private",
+        "canonical": "#6a4cc0",
+        "tonalRamp": [
+          "#201c46",
+          "#342a68",
+          "#49378a",
+          "#5e44ac",
+          "#8871cd",
+          "#a797da",
+          "#c5bce6",
+          "#e4e2f3"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f4f6f8",
+        "tonalRamp": [
+          "#3e4152",
+          "#707380",
+          "#a3a6ae",
+          "#d6d8dc",
+          "#f4f6f9",
+          "#f5f7f9",
+          "#f5f7fa",
+          "#f6f8fb"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d5dbe5",
+        "tonalRamp": [
+          "#373b4e",
+          "#636878",
+          "#8f94a2",
+          "#bbc0cc",
+          "#dce1ea",
+          "#e3e8ef",
+          "#ebeef3",
+          "#f2f4f8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "amount": {
+        "displayName": "Amount",
+        "purpose": "The one loud rupee figure per screen."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "h1 and h2."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default 14px text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, inputs, nav."
+      }
+    },
+    "shadows": [
+      {
+        "name": "nav-active",
+        "value": "0 1px 2px rgba(0,0,0,0.08)",
+        "purpose": "Active nav pill only (shadow-sm)."
+      },
+      {
+        "name": "outline-button",
+        "value": "0 1px 2px rgba(0,0,0,0.05)",
+        "purpose": "Outline button (shadow-xs)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-base",
+        "value": "150ms ease",
+        "purpose": "Colour and background changes; removed under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-base",
+        "value": "360px"
+      },
+      {
+        "name": "desktop-max",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Primary ink action.",
+      "html": "<button class=\"ds-btn ds-btn-default\">Continue</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border:0;border-radius:8px;font:500 14px Schibsted Grotesk,system-ui,sans-serif;cursor:pointer;transition:all .15s}.ds-btn:focus-visible{outline:2px solid #0f7a64;outline-offset:2px}.ds-btn-default{background:#1b2559;color:#fff}.ds-btn-default:hover{background:rgba(27,37,89,.9)}"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "Main go action, e.g. Pay.",
+      "html": "<button class=\"ds-btn ds-btn-accent\">Pay</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border:0;border-radius:8px;font:500 14px Schibsted Grotesk,system-ui,sans-serif;cursor:pointer;transition:all .15s}.ds-btn:focus-visible{outline:2px solid #0f7a64;outline-offset:2px}.ds-btn-accent{background:#0f7a64;color:#fff}.ds-btn-accent:hover{background:rgba(15,122,100,.9)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Low emphasis action.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border:0;border-radius:8px;font:500 14px Schibsted Grotesk,system-ui,sans-serif;cursor:pointer;transition:all .15s}.ds-btn:focus-visible{outline:2px solid #0f7a64;outline-offset:2px}.ds-btn-secondary{background:#e9edf2;color:#1b2559}.ds-btn-secondary:hover{background:rgba(233,237,242,.7)}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form field with teal focus ring.",
+      "html": "<input class=\"ds-input\" placeholder=\"Item name\">",
+      "css": ".ds-input{height:40px;width:100%;box-sizing:border-box;border:1px solid #d5dbe5;border-radius:8px;background:#fff;color:#1b2559;padding:0 12px;font:14px Schibsted Grotesk,system-ui,sans-serif;transition:border-color .15s}.ds-input::placeholder{color:#5d6685}.ds-input:focus-visible{outline:none;border-color:#0f7a64;box-shadow:0 0 0 3px rgba(15,122,100,.2)}"
+    },
+    {
+      "name": "Nav Pills",
+      "kind": "nav",
+      "description": "Top pill nav with active link.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-a ds-nav-on\">Pay</a><a class=\"ds-nav-a\">Hub</a><a class=\"ds-nav-a\">Chat</a></nav>",
+      "css": ".ds-nav{display:inline-flex;gap:4px;padding:4px;border-radius:8px;background:#e9edf2;font:500 14px Schibsted Grotesk,system-ui,sans-serif}.ds-nav-a{height:32px;display:flex;align-items:center;padding:0 12px;border-radius:6px;color:#5d6685;cursor:pointer}.ds-nav-a:hover{color:#1b2559}.ds-nav-on{background:#fff;color:#1b2559;box-shadow:0 1px 2px rgba(0,0,0,.08)}"
+    },
+    {
+      "name": "Rupee Amount",
+      "kind": "custom",
+      "description": "The one loud figure per screen.",
+      "html": "<div class=\"ds-amount\">₹10,824</div>",
+      "css": ".ds-amount{font:800 44px/1 Schibsted Grotesk,system-ui,sans-serif;letter-spacing:-.035em;font-variant-numeric:tabular-nums;color:#1b2559}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Passbook",
+    "overview": "A bank passbook, not a dashboard. Ink-indigo type on cool paper, ruled hairlines instead of boxes, and one loud rupee figure per screen.",
+    "keyCharacteristics": [
+      "One loud rupee figure per screen.",
+      "Hairline rules and tonal surfaces, not shadows and boxes.",
+      "Indigo ink primary; teal only for good and the main action.",
+      "Light and dark follow the system setting.",
+      "Mobile first at 360 px."
+    ],
+    "rules": [
+      {
+        "name": "The One Loud Figure Rule",
+        "body": "Each screen has one rupee amount in the amount style.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never Colour-Only Rule",
+        "body": "Status colours always pair with an icon or a word; text contrast at least 4.5:1.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Every number uses tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Separate with a 1 px Hairline or a tonal step, never a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do lead each screen with one rupee figure in the amount style.",
+      "Do separate sections with a 1 px Hairline rule.",
+      "Do use Banknote Teal for good and the main action only.",
+      "Do pair every status colour with an icon or a word."
+    ],
+    "donts": [
+      "Don't use PayPal logos, copied PayPal colours, or affiliation wording.",
+      "Don't add shadows to create hierarchy.",
+      "Don't use colour as the only signal.",
+      "Don't put a second large, heavy figure on a screen."
+    ]
+  }
+}
