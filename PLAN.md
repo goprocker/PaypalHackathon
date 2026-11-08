@@ -48,20 +48,40 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 
 ## Session Handoff (2026-11-08)
 
-**State:** Planning only. No code written. Folder holds PRD.md, TECH_STACK.md, DESIGN.md, BUILD_PROMPT.md, PLAN.md.
+**State:** H0–H8 done, committed locally (no remote yet). Mock mode works end to end. Context used ~13% (128k/1M).
+
+**Commits (local git, `master`)**
+- `85f489f` scaffold Next.js 16 + deps
+- `b3c4adf` true cost, FX, trust score, AI verdict API
+- `3710866` PayPal checkout (orders/capture), tag sheet, proof receipt, DB + seed, demo login
+- `8e8c8a8` privacy.ts + Money Hub (`/hub`)
+
+**How to run:** `npm install` → `npm run setup` (db push + seed) → `npx next dev`. Checks: `npm test` (25 pass), `npm run typecheck`, `npx eslint src tests scripts`, `npm run build`.
 
 **Decisions made**
-- 1-day MVP vertical slice (see "1-day MVP"); everything else cut.
-- Charge USD in PayPal sandbox (INR gives `CURRENCY_NOT_ALLOWED`); show INR as converted true cost.
-- Signed-cookie "Try demo family" login instead of Auth.js.
-- Deadline: Nov 12, 2026, 12:00 pm PST. Needs public repo, demo link, public YouTube video under 3 min.
+- 1-day MVP vertical slice; everything else cut.
+- Charge USD in PayPal sandbox; show INR true cost.
+- Signed-cookie "Try demo family" login (u_me / u_mom / u_dad), not Auth.js.
+- npm instead of pnpm (pnpm not installed).
+- PayPal JS SDK v6 via `@paypal/react-paypal-js/sdk-v6` (`PayPalProvider` + `PayPalOneTimePaymentButton`).
+- Next 16 `cacheComponents` is on: cookie reads wrapped in `<Suspense>` in layout; pages using `new Date()` call `await connection()`.
+- Untagged txns treated as Private for other members (PRD silent).
+- Commits carry both Co-authored-by (Gopinath2638) and Claude trailers.
+
+**Verified**
+- Mock flow via curl: session → verdict (live FX) → order → capture → repeat capture idempotent → tag → proof.
+- Privacy on dev server: Mom's family view hides my private items as "Personal – Other".
+
+**Not verified**
+- Real PayPal sandbox payment and real Claude calls (no keys yet).
+- UI in a real browser (layout, mobile, dark mode, chart rendering).
 
 **Open items**
-- User has not yet approved starting the build.
-- Need PayPal sandbox app (client id, secret, webhook id) and Anthropic API key from user.
-- Re-read the Devpost rules page for prize, IP and eligibility terms (not fully verified).
-- BUILD_PROMPT.md still says "one run, no questions" with the full scope; update it to match this plan or ignore it.
+- Need from user in `.env`: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `PAYPAL_WEBHOOK_ID`, `ANTHROPIC_API_KEY`.
+- Re-read Devpost rules page (prize, IP, eligibility).
+- Seed has 30 txns this month only (PRD wants ~60 over two months + one failed payment); fine for MVP.
+- Add git remote and push when user gives repo URL.
 
-**Next step:** On approval, scaffold the Next.js app, then follow the hour plan from H0.
+**Next step:** H8–10: chat agent (`/api/ai/chat`, Claude tool use with `get_transactions`, `calculate_true_cost`, `budget_summary`, finance-only prompt, streaming, rule fallback; tools must read through `familyMonth`/`shapeForViewer`) + `/chat` page; then `/api/paypal/webhook` with `verify-webhook-signature` and a rejection unit test. Then H10–12 deploy (Vercel + Turso).
 
 **Notes:** AGENTS.md asks for caveman-style chat replies and Conventional Commits with the specified Co-authored-by trailer.
