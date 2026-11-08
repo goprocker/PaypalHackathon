@@ -203,7 +203,7 @@
       "kind": "custom",
       "description": "The one loud figure per screen.",
       "html": "<div class=\"ds-amount\">₹10,824</div>",
-      "css": ".ds-amount{font:800 44px/1 Schibsted Grotesk,system-ui,sans-serif;letter-spacing:-.035em;font-variant-numeric:tabular-nums;color:#1b2559}"
+      "css": ".ds-amount{font:800 44px/1 Schibsted Grotesk,system-ui,sans-serif;letter-spacing:-.035em;font-variant-numeric:proportional-nums;color:#1b2559}"
     }
   ],
   "narrative": {

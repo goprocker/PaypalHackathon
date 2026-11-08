@@ -28,7 +28,7 @@ typography:
     fontWeight: 800
     lineHeight: 1
     letterSpacing: "-0.035em"
-    fontFeature: "tnum"
+    fontFeature: "pnum"
   heading:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
     fontWeight: 600
@@ -131,7 +131,7 @@ Ink on paper with a banknote-teal accent and three status inks.
 **Character:** A grotesque with some warmth, set tight at heading and amount sizes and plain at body size.
 
 ### Hierarchy
-- **Amount** (800, large, line-height 1, letter-spacing -0.035em, tabular figures): the headline rupee figure.
+- **Amount** (800, large, line-height 1, letter-spacing -0.035em, proportional figures so commas stay tight): the headline rupee figure.
 - **Heading** (600, letter-spacing -0.02em): h1 and h2.
 - **Section title** (600, 14px): `Section` and `CardTitle`, with a 16px muted icon.
 - **Body** (400, 14px): default text; Indian grouping for INR (₹1,23,456), always with the symbol.
