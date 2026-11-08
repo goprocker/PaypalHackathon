@@ -22,7 +22,7 @@ export function DemoLogin() {
     const res = await fetch("/api/session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId }) });
     setBusy(null);
     if (!res.ok) return setError("Could not sign in. Try again.");
-    router.push("/pay");
+    router.push("/");
     router.refresh();
   }
 
@@ -38,7 +38,7 @@ export function DemoLogin() {
             key={p.id}
             onClick={() => login(p.id)}
             disabled={busy !== null}
-            className="group flex items-center gap-3 rounded-lg border border-border p-3 text-left transition-colors hover:border-accent hover:bg-surface-2 disabled:opacity-60"
+            className="group flex items-center gap-3 rounded-2xl border border-border p-3 text-left transition-colors hover:border-accent hover:bg-surface-2 disabled:opacity-60"
           >
             <span className="grid size-9 place-items-center rounded-full bg-accent/15 text-sm font-semibold text-accent">{p.name[0]}</span>
             <span className="flex-1">

@@ -14,7 +14,7 @@ export function CategoryDonut({ data }: { data: { category: string; paise: numbe
   const total = data.reduce((s, d) => s + d.paise, 0);
   const summary = data.map((d) => `${d.category} ${Math.round((d.paise / total) * 100)}%`).join(", ");
   return (
-    <div className="flex flex-col items-center gap-4 sm:flex-row">
+    <div className="flex flex-col items-center gap-4">
       <div className="h-48 w-48 shrink-0" role="img" aria-label={`Spending by category: ${summary}`}>
         <ResponsiveContainer>
           <PieChart>

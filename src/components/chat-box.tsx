@@ -38,7 +38,7 @@ export function ChatBox() {
           <div className="space-y-2">
             <p className="text-sm text-muted">Try one of these:</p>
             {SUGGESTIONS.map((s) => (
-              <button key={s} onClick={() => send(s)} className="block w-full rounded-lg border border-border bg-surface px-4 py-3 text-left text-sm transition-colors hover:border-accent">
+              <button key={s} onClick={() => send(s)} className="block w-full rounded-2xl border border-border bg-surface px-4 py-3 text-left text-sm transition-colors hover:border-accent">
                 {s}
               </button>
             ))}
@@ -57,7 +57,7 @@ export function ChatBox() {
         {busy && <div className="h-5 w-32 animate-pulse rounded bg-surface-2" aria-label="Thinking" />}
         {error && <p role="alert" className="text-sm text-bad">{error}</p>}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); send(input); }} className={cn("sticky bottom-4 flex gap-2 rounded-lg border border-border bg-surface p-2")}>
+      <form onSubmit={(e) => { e.preventDefault(); send(input); }} className={cn("sticky bottom-24 flex gap-2 rounded-2xl border border-border bg-surface p-2 shadow-[0_4px_16px_rgba(12,27,61,0.08)]")}>
         <Input
           value={input}
           onChange={(e) => setInput(e.target.value)}

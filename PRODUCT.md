@@ -23,7 +23,7 @@ Covers a payment's whole life: checks it before it happens (true INR cost, merch
 - Charges are made in USD in the PayPal sandbox (INR is not usable there); INR is shown as the converted true cost across payment methods (PayPal balance, Indian credit card, forex card).
 - Demo uses a signed-cookie "Try demo family" login (Me / Mom / Dad) with seeded transactions.
 - Mock provider runs when PayPal keys are missing, badged as such.
-- Mobile first (360 px), scaling to a two-column desktop layout.
+- An installable PWA (manifest, icons, offline page), shown as a phone-width column on every screen size with a bottom tab bar.
 
 ## Capabilities and Constraints
 - Built: true-cost table, trust score, AI verdict with rule fallback, PayPal order/capture, tag sheet (Me / Family / Private), proof receipt, Money Hub, finance chat agent with tools, verified PayPal webhook.

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 export function Card({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("rounded-lg border border-border bg-surface", className)} {...props} />;
+  return <div className={cn("rounded-2xl bg-surface shadow-[0_1px_2px_rgba(12,27,61,0.06)]", className)} {...props} />;
 }
 
 export function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
@@ -19,8 +19,8 @@ export function CardContent({ className, ...props }: React.ComponentProps<"div">
 /** Section separated by a hairline rule instead of a box. */
 export function Section({ title, icon: Icon, className, children }: { title: string; icon?: React.ComponentType<{ className?: string }>; className?: string; children: React.ReactNode }) {
   return (
-    <section className={cn("border-t border-border pt-4", className)}>
-      <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+    <section className={cn("rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]", className)}>
+      <h2 className="mb-3 flex items-center gap-2 text-base font-semibold">
         {Icon && <Icon aria-hidden className="size-4 text-muted" />}
         {title}
       </h2>

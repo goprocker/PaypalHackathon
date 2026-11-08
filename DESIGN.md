@@ -1,27 +1,27 @@
 ---
 name: PayHub AI
-description: Know where your money goes. A passbook-style money companion for payments in rupees.
+description: Know where your money goes. An installable money app that shows the real rupee cost before you pay.
 colors:
-  ink-indigo: "#1b2559"
-  paper: "#f4f6f8"
+  cobalt: "#1456e0"
+  navy: "#0a2766"
+  ink: "#0c1b3d"
+  mist: "#f2f5fa"
   surface: "#ffffff"
-  surface-2: "#e9edf2"
-  muted-ink: "#5d6685"
-  hairline: "#d5dbe5"
-  banknote-teal: "#0f7a64"
-  marigold: "#b57708"
+  surface-2: "#e8eefa"
+  muted-ink: "#5a6784"
+  hairline: "#e2e8f3"
+  teal-good: "#0f7a64"
+  marigold: "#8f5e00"
   sindoor: "#c0352b"
   lavender-private: "#6a4cc0"
-  night-paper: "#0e1330"
-  night-surface: "#151b3d"
-  night-surface-2: "#1e2650"
-  night-text: "#e8ebf7"
-  night-muted: "#9aa3c7"
-  night-hairline: "#2a3363"
-  night-teal: "#3cc8a6"
-  night-marigold: "#f0b33a"
-  night-sindoor: "#f07a6f"
-  night-lavender: "#a990f2"
+  night-mist: "#0a1228"
+  night-surface: "#121c3b"
+  night-surface-2: "#1b2750"
+  night-ink: "#eaf0ff"
+  night-muted: "#9fb0d6"
+  night-hairline: "#27345f"
+  night-cobalt: "#6d9bff"
+  night-navy: "#0f2f7a"
 typography:
   amount:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
@@ -31,166 +31,135 @@ typography:
     fontFeature: "pnum"
   heading:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontWeight: 600
+    fontWeight: 700
     letterSpacing: "-0.02em"
   body:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 400
-  label:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 500
 rounded:
-  md: "6px"
-  lg: "8px"
+  xl: "12px"
+  card: "16px"
+  hero: "24px"
   full: "999px"
 spacing:
-  xs: "4px"
   sm: "8px"
   md: "16px"
-  lg: "20px"
+  gutter: "20px"
 components:
   button-default:
-    backgroundColor: "{colors.ink-indigo}"
+    backgroundColor: "{colors.cobalt}"
     textColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    height: "40px"
-    padding: "0 16px"
-  button-accent:
-    backgroundColor: "{colors.banknote-teal}"
-    textColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    height: "40px"
-    padding: "0 16px"
-  button-secondary:
-    backgroundColor: "{colors.surface-2}"
-    textColor: "{colors.ink-indigo}"
-    rounded: "{rounded.lg}"
-    height: "40px"
-  input:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink-indigo}"
-    rounded: "{rounded.lg}"
-    height: "40px"
-    padding: "0 12px"
+    rounded: "{rounded.full}"
+    height: "44px"
+    padding: "0 20px"
   card:
     backgroundColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.card}"
     padding: "20px"
+  hero-card:
+    backgroundColor: "{colors.navy}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.hero}"
+    padding: "24px"
+  input:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.xl}"
+    height: "48px"
 ---
 
 # Design System: PayHub AI
 
 ## Overview
 
-**Creative North Star: "The Passbook"**
+**Creative North Star: "The Pocket Wallet"**
 
-A bank passbook, not a dashboard. Ink-indigo type sits on cool paper, sections are separated by ruled hairlines instead of boxes, and each screen has exactly one loud element: the rupee figure. Everything else is quiet so that a money screen reads in two seconds.
-
-Density is calm and tabular. Colour carries meaning (good, caution, bad, private) and is always paired with an icon or a word. The system is Operate-mode: scanability and consistency beat expression, and brand lives in the amount, the rules, and the precise details.
+An installable phone app (PWA), not a website. A phone-width column on every screen size: white rounded cards on a soft blue-grey ground, one deep-navy hero card with the big rupee figure, pill buttons and chips, circular avatars, and a bottom tab bar with a raised round Pay action. The feel is the common modern payments-app language: friendly, rounded, confident, numbers first. It is inspired by that genre but is its own brand and never copies PayPal's logo, name or exact colours.
 
 **Key Characteristics:**
-- One loud rupee figure per screen; everything else subordinate.
-- Hairline rules and tonal surfaces, not shadows and boxes.
-- Indigo ink as the primary; teal only for "this is good / this is the action".
-- Light and dark themes follow the system setting, both fully tokenised.
-- Mobile first at 360 px, scaling to a two-column desktop layout.
+- Phone column (max 480 px), centred on larger screens; bottom tab bar with a raised centre Pay button.
+- One loud rupee figure per screen, set in the `amount` style on the navy hero card.
+- Rounded everything: 24 px hero, 16 px cards, 12 px fields, fully round buttons, chips and avatars.
+- Cards are white and nearly flat; a 1 px soft shadow, no heavy elevation.
+- Light and dark themes follow the system; installable with manifest, icons and an offline page.
 
 ## Colors
 
-Ink on paper with a banknote-teal accent and three status inks.
+Cobalt action on mist, navy for the hero, teal only for good news.
 
 ### Primary
-- **Ink Indigo** (#1b2559): body text, the default button, headings. In dark mode the roles invert: text and primary become Night Text (#e8ebf7).
-
-### Secondary
-- **Banknote Teal** (#0f7a64): the accent. Focus ring, good-for-you, success, the accent button, the nav avatar. Dark: Night Teal (#3cc8a6).
+- **Cobalt** (#1456e0): buttons, the active tab, links, focus ring, the Pay circle. Dark: #6d9bff.
+- **Navy** (#0a2766): the hero card and theme colour. Dark: #0f2f7a.
 
 ### Tertiary (status)
-- **Marigold** (#b57708): caution, budget at 80%. Dark: #f0b33a.
-- **Sindoor** (#c0352b): think again, over budget, failed. Dark: #f07a6f.
-- **Lavender Private** (#6a4cc0): the Private tag only. Dark: #a990f2.
+- **Teal Good** (#0f7a64): good for you, cheapest method, success.
+- **Marigold** (#8f5e00): caution, budget at 80%. **Sindoor** (#c0352b): think again, over budget, failed. **Lavender Private** (#6a4cc0): the Private tag only.
 
 ### Neutral
-- **Paper** (#f4f6f8): page background. Dark: Night Paper (#0e1330).
-- **Surface** (#ffffff): cards, inputs, the active nav pill. Dark: #151b3d.
-- **Surface 2** (#e9edf2): chips, secondary buttons, nav track. Dark: #1e2650.
-- **Muted Ink** (#5d6685): secondary text, icons. Dark: #9aa3c7.
-- **Hairline** (#d5dbe5): borders and section rules. Dark: #2a3363.
+- **Mist** (#f2f5fa): page ground. **Surface** (#ffffff): cards. **Surface 2** (#e8eefa): chips, empty tracks. **Ink** (#0c1b3d): text. **Muted Ink** (#5a6784): secondary text. **Hairline** (#e2e8f3): dividers.
 
 ### Named Rules
-**The One Loud Figure Rule.** Each screen has one rupee amount in the `amount` style. Nothing else competes with it for size or weight.
+**The One Loud Figure Rule.** Each screen has one rupee amount in the `amount` style, normally on the navy hero.
 
-**The Never Colour-Only Rule.** Good, caution, bad and private are always paired with an icon or a text label. Text contrast stays at or above 4.5:1.
+**The Never Colour-Only Rule.** Good, caution, bad and private always pair with an icon or a word. Text contrast stays at or above 4.5:1.
 
 ## Typography
 
-**Display / Body Font:** Schibsted Grotesk (with system-ui, sans-serif), loaded through `next/font`.
-
-**Character:** A grotesque with some warmth, set tight at heading and amount sizes and plain at body size.
+**Font:** Schibsted Grotesk (with system-ui), via `next/font`.
 
 ### Hierarchy
-- **Amount** (800, large, line-height 1, letter-spacing -0.035em, proportional figures so commas stay tight): the headline rupee figure.
-- **Heading** (600, letter-spacing -0.02em): h1 and h2.
-- **Section title** (600, 14px): `Section` and `CardTitle`, with a 16px muted icon.
-- **Body** (400, 14px): default text; Indian grouping for INR (₹1,23,456), always with the symbol.
-- **Label** (500, 14px): buttons, inputs, nav links; 12px for small buttons and captions.
+- **Amount** (800, 48 px, line-height 1, tracking -0.035em, proportional figures so commas stay tight): the hero figure.
+- **Heading** (700, 24 px page title, 16 px section title).
+- **Body** (400, 14 px). **Label** (600, 14 px for buttons; 11 px for tab labels).
 
 ### Named Rules
-**The Tabular Rule.** Every number uses tabular figures (`.tabular` or `.amount`) so columns of money align.
+**The Tabular Rule.** Numbers in lists and tables use tabular figures so money aligns. The single hero amount is the exception.
 
 ## Layout
 
-A 4 px grid with 16 and 20 px as the working gaps and paddings. Mobile first at 360 px, scaling to a two-column desktop layout capped around 1100 px. Navigation is a top pill group (Pay, Hub, Chat) with the user avatar beside it. Content is grouped into hairline-ruled `Section`s rather than stacked cards; use a `Card` only where a bordered group is genuinely needed.
+A single phone column, 480 px max, 20 px side gutters, 16 to 24 px between sections. A sticky top bar (home mark, greeting, member avatar), content, then a fixed bottom tab bar (Home, Hub, raised Pay, Ask AI, Family) with safe-area padding. On wider screens the column is centred over a slightly darker ground. Never use viewport breakpoints to add columns; the app is one column everywhere.
 
 ## Elevation & Depth
 
-Flat and border-led. Structure comes from 1 px hairlines and the paper/surface/surface-2 tonal steps. The only shadow in the system is `shadow-sm` on the active nav pill; the outline button has an extra-light `shadow-xs`. Shadows never signal importance.
-
-### Named Rules
-**The Hairline Rule.** Separate with a 1 px Hairline border or a tonal step. Do not add a shadow to separate.
+Nearly flat. Cards sit on the mist ground with a 1 px soft shadow (`0 1px 2px rgba(12,27,61,0.06)`). The only lifted element is the raised Pay circle (`0 6px 16px rgba(20,86,224,0.35)`) and the sticky chat composer.
 
 ## Shapes
 
-Gently rounded: 8 px (`rounded-lg`) on cards, buttons and inputs, 6 px on the nav pills, and full round on avatars and chips. Borders are 1 px Hairline.
+Generously rounded: hero 24 px, cards 16 px, fields and tiles 12 to 16 px, buttons, chips, tabs and avatars fully round. Hero cards carry two soft circles as their only ornament.
 
 ## Components
 
 ### Buttons
-- **Shape:** 8 px radius, 40 px tall (32 small, 44 large, 40 square for icon), 16 px side padding, 14 px medium type.
-- **Default:** Ink Indigo fill, white text, 90% on hover.
-- **Accent:** Banknote Teal fill, white text; the main "go" action.
-- **Secondary / Outline / Ghost:** Surface 2 fill; bordered Surface with `shadow-xs`; or text-only Muted Ink that gains Surface 2 on hover.
-- **Focus:** a 2 px Banknote Teal outline with 2 px offset (global `:focus-visible`). Disabled drops to 50% opacity.
+- Fully round, 44 px tall (36 small, 48 large), 600 weight. Default is Cobalt with white text; secondary is Surface 2; on the navy hero the button is white with navy text. Focus is a 2 px Cobalt outline.
 
-### Cards / Containers
-- **Corner Style:** 8 px. **Background:** Surface. **Border:** 1 px Hairline. **Shadow:** none. **Padding:** 20 px (`px-5`).
+### Cards
+- White, 16 px radius, 20 px padding, soft shadow, no border. Sections are cards with a 16 px semibold title.
 
-### Inputs / Fields
-- **Style:** 40 px tall, Surface fill, 1 px Hairline, 8 px radius, 12 px side padding, Muted placeholder.
-- **Focus:** border turns Banknote Teal with a 3 px 20% teal ring; the default outline is removed.
+### Inputs
+- 48 px tall, 12 px radius, 1 px Hairline; focus turns the border Cobalt with a 3 px 20% ring.
 
 ### Navigation
-- Pill group on a Surface 2 track with 4 px padding. Links are 32 px tall, 6 px radius, Muted Ink with a 16 px icon. The active link takes Surface fill, Ink text and `shadow-sm`, and carries `aria-current="page"`.
+- Bottom tab bar, 56 px min target per tab, 11 px labels, active tab bold with a Cobalt icon. The centre Pay is a 56 px Cobalt circle raised 20 px above the bar.
 
-### Rupee Amount (signature)
-- The `amount` style: weight 800, line-height 1, tabular figures, tight tracking. Appears once per screen, as the Home receipt total, the Hub monthly spend, or the checkout total.
+### Hero Card (signature)
+- Navy 24 px card, white text, one `amount` figure, a thin progress bar, and a white pill action.
+
+### Chips and Avatars
+- Pill chips for tags. Avatars are 56 px circles with a pastel tint and an initial.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** lead each screen with one rupee figure in the `amount` style.
-- **Do** separate sections with a 1 px Hairline rule.
-- **Do** use Banknote Teal for good and for the main action only.
-- **Do** pair every status colour with an icon or a word.
-- **Do** show INR with Indian grouping and the ₹ symbol, and word estimates as estimates.
-- **Do** honour `prefers-reduced-motion`; transitions are removed entirely.
-- **Do** badge anything simulated as Demo.
+- **Do** keep every screen a single phone-width column with the bottom tab bar.
+- **Do** put one rupee figure on the navy hero card.
+- **Do** make every tap target at least 44 px.
+- **Do** pair status colour with an icon or a word.
+- **Do** show INR with Indian grouping and word estimates as estimates; badge anything simulated as Demo.
+- **Do** keep it installable: manifest, icons, offline fallback, safe-area padding.
 
 ### Don't:
-- **Don't** use PayPal logos, copied PayPal colours, or wording that suggests affiliation. Keep the footer: "Independent demo built on the PayPal developer platform."
-- **Don't** add shadows to create hierarchy.
-- **Don't** use colour as the only signal.
+- **Don't** use PayPal's logo, name as branding, or copied brand colours; keep the "Independent demo, not affiliated with PayPal" footer.
+- **Don't** add multi-column desktop layouts or viewport-based column grids.
+- **Don't** add heavy shadows or borders to cards.
 - **Don't** call a merchant a scam; say "high risk signals".
-- **Don't** put a second large, heavy figure on a screen.

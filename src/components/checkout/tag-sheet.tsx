@@ -37,21 +37,21 @@ export function TagSheet({ txnId, defaultItem }: { txnId: string; defaultItem: s
   }
 
   return (
-    <div role="dialog" aria-modal="true" aria-labelledby="tag-title" className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 md:items-center">
-      <div className="w-full max-w-md rounded-lg border border-border bg-surface p-6 shadow-xl">
+    <div role="dialog" aria-modal="true" aria-labelledby="tag-title" className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4">
+      <div className="w-full max-w-md rounded-3xl bg-surface p-6 shadow-xl">
         {!proof ? (
           <>
             <h2 id="tag-title" className="text-lg font-bold">What did you buy?</h2>
-            <input aria-label="Item" className="mt-3 h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm focus-visible:border-accent focus-visible:outline-none" value={item} onChange={(e) => setItem(e.target.value)} maxLength={200} />
+            <input aria-label="Item" className="mt-3 h-12 w-full rounded-xl border border-border bg-surface px-3 text-sm focus-visible:border-accent focus-visible:outline-none" value={item} onChange={(e) => setItem(e.target.value)} maxLength={200} />
             <p className="mt-4 text-sm text-muted">Who is it for?</p>
             <div className="mt-2 grid grid-cols-3 gap-2">
-              <button disabled={busy} onClick={() => save("me")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg border border-border text-sm font-medium transition-colors hover:border-primary hover:bg-primary/5">
+              <button disabled={busy} onClick={() => save("me")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl border border-border text-sm font-medium transition-colors hover:border-primary hover:bg-primary/5">
                 <User aria-hidden className="size-4" /> Me
               </button>
-              <button disabled={busy} onClick={() => save("family")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg border border-border text-sm font-medium text-good transition-colors hover:border-good hover:bg-good/5">
+              <button disabled={busy} onClick={() => save("family")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl border border-border text-sm font-medium text-good transition-colors hover:border-good hover:bg-good/5">
                 <Users aria-hidden className="size-4" /> Family
               </button>
-              <button disabled={busy} onClick={() => save("private")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg border border-border text-sm font-medium text-private transition-colors hover:border-private hover:bg-private/5">
+              <button disabled={busy} onClick={() => save("private")} className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl border border-border text-sm font-medium text-private transition-colors hover:border-private hover:bg-private/5">
                 <Lock aria-hidden className="size-4" /> Private
               </button>
             </div>

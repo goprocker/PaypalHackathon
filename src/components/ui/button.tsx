@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -13,10 +13,10 @@ export const buttonVariants = cva(
         ghost: "text-muted hover:bg-surface-2 hover:text-text",
       },
       size: {
-        default: "h-10 px-4",
-        sm: "h-8 px-3 text-xs",
-        lg: "h-11 px-6",
-        icon: "size-10",
+        default: "h-11 px-5",
+        sm: "h-9 px-4 text-xs",
+        lg: "h-12 px-6 text-base",
+        icon: "size-11",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

@@ -26,11 +26,11 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
   const usedPct = s.budgetPaise ? Math.round((s.spentPaise / s.budgetPaise) * 100) : 0;
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className="space-y-5">
+      <div className="flex flex-col gap-4">
         <div>
           <p className="text-sm text-muted">{view === "family" ? "Family" : "You"} spent in {month}</p>
-          <div className="amount mt-2 text-5xl md:text-7xl">{formatInr(s.spentPaise)}</div>
+          <div className="amount mt-2 text-5xl">{formatInr(s.spentPaise)}</div>
           <p className={cn("mt-3 text-sm", over ? "text-bad" : "text-muted")}>
             {over
               ? `Over budget by ${formatInr(-s.budgetLeftPaise)}`
@@ -40,14 +40,14 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
             <div className={cn("h-1.5 rounded-full", over ? "bg-bad" : usedPct >= 80 ? "bg-warn" : "bg-accent")} style={{ width: `${Math.min(100, usedPct)}%` }} />
           </div>
         </div>
-        <div role="tablist" aria-label="View" className="flex rounded-lg bg-surface-2 p-1 text-sm">
+        <div role="tablist" aria-label="View" className="flex self-start rounded-full bg-surface p-1 text-sm shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
           {(["individual", "family"] as const).map((v) => (
             <Link
               key={v}
               role="tab"
               aria-selected={view === v}
               href={`/hub?view=${v}`}
-              className={cn("flex h-11 items-center rounded-md px-4 sm:h-8 font-medium", view === v ? "bg-surface shadow-sm" : "text-muted hover:text-text")}
+              className={cn("flex h-11 items-center rounded-full px-4 font-semibold", view === v ? "bg-accent text-on-accent" : "text-muted hover:text-text")}
             >
               {v === "individual" ? "Just me" : "Whole family"}
             </Link>
@@ -55,7 +55,7 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
         </div>
       </div>
 
-      <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+      <div className="grid gap-4">
         <Section title="Where it went" icon={PieChart}>
           {s.byCategory.length ? <CategoryDonut data={s.byCategory} /> : <Empty />}
         </Section>
@@ -72,7 +72,7 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
           </Section>
         )}
 
-        <Section title="Recent payments" icon={List} className={view === "family" ? "" : "md:col-span-2"}>
+        <Section title="Recent payments" icon={List} >
           {list.length === 0 ? <Empty /> : (
             <ul className="divide-y divide-border text-sm">
               {list.map((r) => (

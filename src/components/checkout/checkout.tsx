@@ -58,8 +58,8 @@ export function Checkout({ mock, clientId }: { mock: boolean; clientId: string }
   };
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
-      <form onSubmit={check} className="space-y-4 self-start rounded-lg border border-border bg-surface p-5">
+    <div className="grid gap-5">
+      <form onSubmit={check} className="space-y-4 self-start rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
         <Label>Product link
           <Input value={form.link} onChange={set("link")} inputMode="url" />
         </Label>
@@ -127,7 +127,7 @@ function CostSummary({ result }: { result: CheckResult }) {
   return (
     <section>
       <p className="text-sm text-muted">True cost with {best.label}</p>
-      <div className="amount mt-2 text-5xl md:text-6xl">{formatInr(best.totalPaise)}</div>
+      <div className="amount mt-2 text-5xl">{formatInr(best.totalPaise)}</div>
       <p className="mt-2 text-sm text-muted">
         At ₹{result.fx.usdInr.toFixed(2)} per USD {result.fx.source === "fallback" && <MockBadge label="Fallback rate" />}
       </p>
