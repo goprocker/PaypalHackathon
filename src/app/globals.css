@@ -1,34 +1,37 @@
 @import "tailwindcss";
 
+/* Passbook palette: ink indigo on cool paper, banknote teal, marigold, sindoor. */
 :root {
-  --bg: #f6f8fc;
+  --bg: #f4f6f8;
   --surface: #ffffff;
-  --surface-2: #eef2f9;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --primary: #1d4ed8;
+  --surface-2: #e9edf2;
+  --text: #1b2559;
+  --muted: #5d6685;
+  --border: #d5dbe5;
+  --primary: #1b2559;
   --primary-fg: #ffffff;
-  --good: #15803d;
-  --warn: #b45309;
-  --bad: #dc2626;
-  --private: #7c3aed;
+  --accent: #0f7a64;
+  --good: #0f7a64;
+  --warn: #b57708;
+  --bad: #c0352b;
+  --private: #6a4cc0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0b1120;
-    --surface: #141b2d;
-    --surface-2: #1b2438;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --border: #26304a;
-    --primary: #60a5fa;
-    --primary-fg: #0b1120;
-    --good: #4ade80;
-    --warn: #fbbf24;
-    --bad: #f87171;
-    --private: #a78bfa;
+    --bg: #0e1330;
+    --surface: #151b3d;
+    --surface-2: #1e2650;
+    --text: #e8ebf7;
+    --muted: #9aa3c7;
+    --border: #2a3363;
+    --primary: #e8ebf7;
+    --primary-fg: #0e1330;
+    --accent: #3cc8a6;
+    --good: #3cc8a6;
+    --warn: #f0b33a;
+    --bad: #f07a6f;
+    --private: #a990f2;
   }
 }
 
@@ -41,22 +44,28 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
   --color-good: var(--good);
   --color-warn: var(--warn);
   --color-bad: var(--bad);
   --color-private: var(--private);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-sans);
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+h1, h2 { letter-spacing: -0.02em; }
 
 .tabular { font-variant-numeric: tabular-nums; }
 
-:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+/* The big rupee figure: the one loud element on each screen. */
+.amount { font-variant-numeric: tabular-nums; font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

@@ -4,8 +4,8 @@ import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis
 import { formatInr } from "@/lib/truecost";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Groceries: "#16A34A", Bills: "#1D4ED8", Shopping: "#D946EF", Food: "#F59E0B",
-  Subscriptions: "#EF4444", Friends: "#06B6D4", Other: "#6B7280", Personal: "#7C3AED",
+  Groceries: "#0F7A64", Bills: "#3A4A8C", Shopping: "#C2557A", Food: "#D9920F",
+  Subscriptions: "#C0352B", Friends: "#2A9DB0", Other: "#8A91A8", Personal: "#6A4CC0",
 };
 
 const tooltip = (v: unknown) => formatInr(Number(v));
@@ -48,7 +48,7 @@ export function MemberBars({ data }: { data: { name: string; paise: number }[] }
           <XAxis type="number" hide />
           <YAxis type="category" dataKey="name" width={70} tickLine={false} axisLine={false} />
           <Tooltip formatter={tooltip} cursor={{ fillOpacity: 0.1 }} />
-          <Bar dataKey="paise" fill="var(--primary)" radius={[0, 8, 8, 0]} isAnimationActive={false} />
+          <Bar dataKey="paise" fill="var(--accent)" radius={[0, 4, 4, 0]} isAnimationActive={false} />
         </BarChart>
       </ResponsiveContainer>
     </div>

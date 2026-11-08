@@ -1,6 +1,7 @@
 "use client";
 
 import { PayPalOneTimePaymentButton, PayPalProvider } from "@paypal/react-paypal-js/sdk-v6";
+import { Loader2, Lock } from "lucide-react";
 import { useState } from "react";
 
 interface Props {
@@ -47,9 +48,10 @@ export function PayButton({ mock, clientId, payload, onPaid }: Props) {
               setBusy(false);
             }
           }}
-          className="min-h-11 w-full rounded-xl bg-primary font-medium text-primary-fg disabled:opacity-60"
+          className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-accent text-sm font-medium text-white hover:bg-accent/90 disabled:opacity-60"
         >
-          {busy ? "Paying…" : "Pay (mock)"}
+          {busy ? <Loader2 aria-hidden className="size-4 animate-spin" /> : <Lock aria-hidden className="size-4" />}
+          {busy ? "Paying" : "Pay with mock PayPal"}
         </button>
         {error && <p role="alert" className="mt-2 text-sm text-bad">{error}</p>}
       </>

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Wallet } from "lucide-react";
+import { Schibsted_Grotesk } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { MockBadge } from "@/components/badges";
+import { NavLinks } from "@/components/nav-links";
 import { getUser } from "@/lib/db/queries";
 import { paypalMock } from "@/lib/paypal";
 import { currentUserId } from "@/lib/session";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+const sans = Schibsted_Grotesk({ variable: "--font-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "PayHub AI",
@@ -21,23 +23,27 @@ async function HeaderUser() {
   if (!user) return null;
   return (
     <>
-      <nav className="flex gap-3 text-sm">
-        <Link href="/pay" className="text-primary hover:underline">Pay</Link>
-        <Link href="/hub" className="text-primary hover:underline">Hub</Link>
-        <Link href="/chat" className="text-primary hover:underline">Chat</Link>
-      </nav>
-      <span className="ml-auto text-sm text-muted">{user.name} ({user.relation})</span>
+      <NavLinks />
+      <span className="ml-auto flex items-center gap-2 text-sm">
+        <span className="grid size-8 place-items-center rounded-full bg-accent/15 text-xs font-semibold text-accent">{user.name[0]}</span>
+        <span className="hidden sm:block">
+          <span className="font-medium">{user.name}</span> <span className="text-muted">({user.relation})</span>
+        </span>
+      </span>
     </>
   );
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <header className="border-b border-border bg-surface">
+        <header className="sticky top-0 z-40 border-b border-border bg-surface/80 backdrop-blur">
           <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-4 px-4 py-3">
-            <Link href="/" className="text-base font-semibold">PayHub AI</Link>
+            <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
+              <span className="grid size-8 place-items-center rounded-md bg-accent text-white"><Wallet aria-hidden className="size-4" /></span>
+              PayHub AI
+            </Link>
             <Suspense fallback={null}>
               <HeaderUser />
             </Suspense>
@@ -46,8 +52,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </Suspense>
           </div>
         </header>
-        <main className="mx-auto w-full max-w-[1100px] flex-1 px-4 py-6">
-          <Suspense fallback={<div className="h-48 animate-pulse rounded-2xl bg-surface-2" aria-label="Loading" />}>
+        <main className="mx-auto w-full max-w-[1100px] flex-1 px-4 py-8">
+          <Suspense fallback={<div className="h-48 animate-pulse rounded-xl bg-surface-2" aria-label="Loading" />}>
             {children}
           </Suspense>
         </main>

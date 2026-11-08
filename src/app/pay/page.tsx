@@ -7,10 +7,10 @@ export default async function PayPage() {
   if (!(await currentUserId())) redirect("/");
   const mock = paypalMock() || !process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold">Checkout Copilot</h1>
-        <p className="text-sm text-muted">Check the true cost before you pay. All amounts are estimates based on assumptions.</p>
+        <h1 className="text-3xl font-extrabold">Check before you pay</h1>
+        <p className="mt-1 text-sm text-muted">See the rupee total for a USD purchase. All amounts are estimates.</p>
       </div>
       <Checkout mock={mock} clientId={process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? ""} />
     </div>

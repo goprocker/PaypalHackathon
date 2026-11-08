@@ -48,7 +48,7 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 
 ## Session Handoff (2026-11-08)
 
-**State:** H0–H10 done, committed locally (no remote yet). Mock mode works end to end. Context used ~13% (128k/1M).
+**State:** H0–H10 done, committed locally (no remote yet). Mock mode works end to end. UI redesign done but **uncommitted** (see below).
 
 **Commits (local git, `master`)**
 - `85f489f` scaffold Next.js 16 + deps
@@ -57,6 +57,13 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - `8e8c8a8` privacy.ts + Money Hub (`/hub`)
 - `50dcfee` chat agent (`/api/ai/chat`, `/chat`), tools read via `familyMonth`/`shapeForViewer`, rule fallback
 - `61950e3` `/api/paypal/webhook` with verify-webhook-signature; unverified → 401
+
+**Uncommitted: UI redesign (passbook look)**
+- Palette in `globals.css`: ink indigo `#1B2559`, paper `#F4F6F8`, rupee teal accent `#0F7A64`, marigold warn, sindoor bad, lavender private; dark mode too. Font Schibsted Grotesk. `.amount` class = big ₹ figure, the one loud element per screen.
+- shadcn-style primitives: `src/components/ui/{button,card,input}.tsx` (`Section` = hairline-rule section, not boxed card), `cn()` in `src/lib/utils.ts`. New deps: `clsx`, `tailwind-merge`, `class-variance-authority`.
+- lucide icons throughout; `src/components/nav-links.tsx` (active-tab nav, client).
+- Home hero = live true-cost receipt ($129.99 → ₹ by method, computed via `trueCost` at fallback rate). Hub leads with big monthly ₹ + budget bar; "Just me / Whole family" toggle. Checkout leads with ₹ total then method table. Chat: suggestion list, AI avatar, sticky composer. Tag sheet: icon buttons, receipt shows ₹ first. Chart colours retuned.
+- Checked: typecheck + eslint clean; `/`, `/pay`, `/hub`, `/hub?view=family`, `/chat` return 200 with demo session. Not yet checked visually in a browser.
 
 **How to run:** `npm install` → `npm run setup` (db push + seed) → `npx next dev`. Checks: `npm test` (36 pass), `npm run typecheck`, `npx eslint src tests scripts`, `npm run build`.
 
@@ -70,6 +77,8 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Untagged txns treated as Private for other members (PRD silent).
 - Chat replies are JSON, not streamed (simpler; revisit if time).
 - Commits carry both Co-authored-by (Gopinath2638) and Claude trailers.
+- Real data for hackathon: use real keys only (PayPal sandbox + free AI); keep seeded family data, labelled. Skip PayPal Transaction Search (~3h lag) and Account Aggregator (weeks). Statement CSV import = stretch only.
+- AI provider: switch to **Gemini free tier** (`GEMINI_API_KEY`, `gemini-2.5-flash`); keep Claude as alternative and rule fallback.
 
 **Verified**
 - Mock flow via curl: session → verdict (live FX) → order → capture → repeat capture idempotent → tag → proof.
@@ -80,11 +89,12 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - UI in a real browser (layout, mobile, dark mode, chart rendering).
 
 **Open items**
-- Need from user in `.env`: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `PAYPAL_WEBHOOK_ID`, `ANTHROPIC_API_KEY`.
+- Need from user in `.env` (user adds them, never pasted in chat): `GEMINI_API_KEY`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `PAYPAL_WEBHOOK_ID`.
+- Gemini support not built yet: `src/lib/verdict.ts` and `src/lib/chat.ts` only call Anthropic; `layout.tsx` "Rule-based AI" badge checks only `ANTHROPIC_API_KEY`.
 - Re-read Devpost rules page (prize, IP, eligibility).
 - Seed has 30 txns this month only (PRD wants ~60 over two months + one failed payment); fine for MVP.
 - Add git remote and push when user gives repo URL.
 
-**Next step:** H10–12 deploy (Vercel + Turso), register webhook URL in PayPal sandbox, then real-key smoke test + browser UI check.
+**Next steps:** (1) commit UI redesign; (2) add Gemini provider to verdict + chat (tool loop) with rule fallback; (3) user adds keys → real sandbox payment + AI smoke test + browser UI check; (4) deploy (Vercel + Turso), register webhook URL in PayPal sandbox.
 
 **Notes:** AGENTS.md asks for caveman-style chat replies and Conventional Commits with the specified Co-authored-by trailer.
