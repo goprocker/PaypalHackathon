@@ -1,0 +1,5 @@
+[build]
+  command = "npm run setup && npm run build"
+
+[functions]
+  included_files = ["dev.db"]
