@@ -5,7 +5,10 @@ import { TagChip } from "@/components/badges";
 import { DemoLogin } from "@/components/demo-login";
 import { config } from "@/lib/config";
 import { familyMonth } from "@/lib/db/family";
-import { summarize } from "@/lib/hub";
+import { budgets, monthSummary } from "@/lib/money";
+
+type MemberId = DemoPayment["ownerId"];
+import type { DemoPayment } from "@/lib/demo/data";
 import { currentUserId } from "@/lib/session";
 import { formatInr, formatUsd, trueCost } from "@/lib/truecost";
 import { cn } from "@/lib/utils";
@@ -27,11 +30,14 @@ export default async function Home() {
   await connection();
   const userId = await currentUserId();
   const data = userId ? await familyMonth(userId) : null;
-  return data ? <Dashboard data={data} /> : <Welcome />;
+  return data && userId ? <Dashboard data={data} userId={userId as MemberId} /> : <Welcome />;
 }
 
-function Dashboard({ data }: { data: NonNullable<Awaited<ReturnType<typeof familyMonth>>> }) {
-  const s = summarize(data.rows, "individual", data.memberCount);
+function Dashboard({ data, userId }: { data: NonNullable<Awaited<ReturnType<typeof familyMonth>>>; userId: MemberId }) {
+  // Hero reads the same demo payments as Money, Family and Track so the totals agree.
+  const budgetPaise = budgets(userId).reduce((t, b) => t + b.limitPaise, 0);
+  const spentPaise = monthSummary(userId).totalPaise;
+  const s = { spentPaise, budgetPaise, budgetLeftPaise: budgetPaise - spentPaise };
   const month = new Date().toLocaleString("en-IN", { month: "long" });
   const over = s.budgetLeftPaise < 0;
   const usedPct = s.budgetPaise ? Math.round((s.spentPaise / s.budgetPaise) * 100) : 0;
