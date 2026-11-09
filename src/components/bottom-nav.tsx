@@ -1,48 +1,63 @@
 "use client";
 
-import { ArrowUpDown, Home, LayoutDashboard, MessageCircle, Users } from "lucide-react";
+import { Bot, CreditCard, Home, PiggyBank, Radar, ShieldCheck, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const SIDE = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/hub", label: "Hub", icon: LayoutDashboard },
-  { href: "/chat", label: "Ask AI", icon: MessageCircle },
-  { href: "/switch", label: "Family", icon: Users },
+// Six sections. Home is reached from the logo on mobile and the sidebar on desktop.
+const SECTIONS = [
+  { href: "/pay", key: "pay", icon: CreditCard },
+  { href: "/protect", key: "protect", icon: ShieldCheck },
+  { href: "/track", key: "track", icon: Radar },
+  { href: "/money", key: "money", icon: PiggyBank },
+  { href: "/family", key: "family", icon: Users },
+  { href: "/ai", key: "ai", icon: Bot },
 ] as const;
 
-export function BottomNav() {
+export type NavLabels = Record<(typeof SECTIONS)[number]["key"] | "home", string>;
+
+const active = (path: string, href: string) => path === href || path.startsWith(`${href}/`);
+
+export function BottomNav({ labels }: { labels: NavLabels }) {
   const path = usePathname();
-  const item = ({ href, label, icon: Icon }: (typeof SIDE)[number]) => {
-    const on = path === href;
-    return (
-      <Link
-        key={href}
-        href={href}
-        aria-current={on ? "page" : undefined}
-        className={cn("flex min-h-14 flex-1 flex-col items-center justify-center gap-1 text-[11px] font-medium text-muted", on && "font-bold text-text")}
-      >
-        <Icon aria-hidden className={cn("size-6", on && "text-accent")} strokeWidth={on ? 2.4 : 1.8} />
-        {label}
-      </Link>
-    );
-  };
   return (
-    <nav
-      aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-40 mx-auto flex w-full max-w-[480px] items-end border-t border-border bg-surface/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur max-md:pb-[calc(env(safe-area-inset-bottom)+3.5rem)]"
-    >
-      {item(SIDE[0])}
-      {item(SIDE[1])}
-      <Link href="/pay" aria-current={path === "/pay" ? "page" : undefined} className="flex flex-1 flex-col items-center gap-1 pb-1 text-[11px] font-medium text-muted">
-        <span className="-mt-5 grid size-14 place-items-center rounded-full bg-accent text-on-accent shadow-[0_6px_16px_rgba(20,86,224,0.35)]">
-          <ArrowUpDown aria-hidden className="size-6" strokeWidth={2.4} />
-        </span>
-        <span className={cn(path === "/pay" && "font-bold text-text")}>Pay</span>
-      </Link>
-      {item(SIDE[2])}
-      {item(SIDE[3])}
-    </nav>
+    <>
+      <nav
+        aria-label="Main"
+        className="glass fixed inset-x-0 bottom-0 z-40 mx-auto flex w-full max-w-[480px] items-end border-x-0 border-b-0 px-1 pb-[calc(env(safe-area-inset-bottom)+3.5rem)] md:hidden"
+      >
+        {SECTIONS.map(({ href, key, icon: Icon }) => {
+          const on = active(path, href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={on ? "page" : undefined}
+              className={cn("flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium text-muted", on && "font-bold text-text")}
+            >
+              <Icon aria-hidden className={cn("size-5", on && "text-accent")} strokeWidth={on ? 2.4 : 1.8} />
+              <span className="max-w-full truncate">{labels[key]}</span>
+            </Link>
+          );
+        })}
+      </nav>
+      <nav aria-label="Main" className="glass fixed inset-y-0 left-[max(0px,calc(50%-520px))] z-40 hidden w-56 flex-col gap-1 border-y-0 border-l-0 p-4 pt-20 md:flex">
+        {[{ href: "/", key: "home", icon: Home } as const, ...SECTIONS].map(({ href, key, icon: Icon }) => {
+          const on = href === "/" ? path === "/" : active(path, href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={on ? "page" : undefined}
+              className={cn("flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium text-muted hover:bg-surface-2 hover:text-text", on && "bg-accent/15 font-semibold text-text")}
+            >
+              <Icon aria-hidden className={cn("size-5", on && "text-accent")} />
+              {labels[key]}
+            </Link>
+          );
+        })}
+      </nav>
+    </>
   );
 }

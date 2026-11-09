@@ -1,38 +1,16 @@
 @import "tailwindcss";
 
-/* Passbook palette: ink indigo on cool paper, banknote teal, marigold, sindoor. */
+/* Dark navy, electric blue. One theme on purpose. */
 :root {
-  --bg: #f2f5fa;
-  --surface: #ffffff;
-  --surface-2: #e8eefa;
-  --text: #0c1b3d;
-  --muted: #5a6784;
-  --border: #e2e8f3;
-  --primary: #1456e0;
-  --primary-fg: #ffffff;
-  --accent: #1456e0;
-  --navy: #0a2766;
-  --navy-2: #1456e0;
-  --good: #0f7a64;
-  --warn: #8f5e00;
-  --bad: #c0352b;
-  --private: #6a4cc0;
-  --on-accent: #ffffff;
-  --cat-groceries: #0f7a64; --cat-bills: #3a4a8c; --cat-shopping: #c2557a; --cat-food: #d9920f;
-  --cat-subscriptions: #c0352b; --cat-friends: #2a9db0; --cat-other: #8a91a8; --cat-personal: #6a4cc0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a1228;
+    --bg: #070d1f;
     --surface: #121c3b;
     --surface-2: #1b2750;
     --text: #eaf0ff;
     --muted: #9fb0d6;
     --border: #27345f;
-    --primary: #6d9bff;
+    --primary: #3d7bff;
     --primary-fg: #0a1228;
-    --accent: #6d9bff;
+    --accent: #4d8bff;
     --navy: #0f2f7a;
     --navy-2: #2a63e8;
     --good: #3cc8a6;
@@ -43,7 +21,6 @@
     --cat-groceries: #3cc8a6; --cat-bills: #8f9ce0; --cat-shopping: #e585a8; --cat-food: #f0b33a;
     --cat-subscriptions: #f07a6f; --cat-friends: #5cc6d8; --cat-other: #9aa3c7; --cat-personal: #a990f2;
   }
-}
 
 @theme inline {
   --color-bg: var(--bg);
@@ -66,7 +43,6 @@
 }
 
 body {
-  background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
@@ -89,10 +65,10 @@ h1, h2 { letter-spacing: -0.02em; }
 /* PWA app shell: a phone-width column on every screen size, installable and standalone-safe. */
 html { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 body { padding-top: env(safe-area-inset-top); }
-.app-shell { margin-inline: auto; width: 100%; max-width: 480px; min-height: 100dvh; background: var(--bg); }
-@media (min-width: 560px) {
-  body { background: var(--surface-2); }
-  .app-shell { box-shadow: 0 0 0 1px var(--border); }
-}
+.app-shell { margin-inline: auto; width: 100%; max-width: 480px; min-height: 100dvh; }
+@media (min-width: 768px) { .app-shell { max-width: 1040px; padding-left: 15rem; } }
+body { background: radial-gradient(1200px 600px at 80% -10%, rgba(61,123,255,0.18), transparent 60%), var(--bg); background-attachment: fixed; }
+/* Glass card: translucent surface over the navy backdrop. */
+.glass { background: color-mix(in oklab, var(--surface) 72%, transparent); border: 1px solid color-mix(in oklab, var(--border) 80%, transparent); backdrop-filter: blur(14px); }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

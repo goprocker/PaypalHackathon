@@ -5,8 +5,10 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { MockBadge } from "@/components/badges";
 import { BottomNav } from "@/components/bottom-nav";
+import { LangSwitch } from "@/components/lang-switch";
 import { PwaRegister } from "@/components/pwa-register";
 import { getUser } from "@/lib/db/queries";
+import { getT } from "@/lib/i18n/server";
 import { paypalMock } from "@/lib/paypal";
 import { currentUserId } from "@/lib/session";
 import "./globals.css";
@@ -23,8 +25,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0a2766" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1228" },
+    { color: "#070d1f" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -34,17 +35,19 @@ export const viewport: Viewport = {
 async function TopBar() {
   const userId = await currentUserId();
   const user = userId ? await getUser(userId) : null;
+  const { locale, t } = await getT();
   return (
-    <header className="sticky top-0 z-30 flex items-center gap-3 bg-bg/90 px-5 py-3 backdrop-blur">
-      <Link href="/" aria-label="PayHub AI home" className="grid size-10 place-items-center rounded-full bg-surface shadow-[0_1px_2px_rgba(12,27,61,0.08)]">
+    <header className="sticky top-0 z-30 flex items-center gap-3 bg-bg/80 px-5 py-3 backdrop-blur">
+      <Link href="/" aria-label="PayHub AI home" className="glass grid size-10 place-items-center rounded-full">
         <Wallet aria-hidden className="size-5 text-accent" />
       </Link>
       <div className="min-w-0 flex-1">
-        <div className="text-xs text-muted">{user ? "Welcome back" : "PayHub AI"}</div>
-        <div className="truncate text-sm font-semibold">{user ? `${user.name} (${user.relation})` : "Know where your money goes"}</div>
+        <div className="text-xs text-muted">{user ? t("top.welcome") : "PayHub AI"}</div>
+        <div className="truncate text-sm font-semibold">{user ? `${user.name} (${user.relation})` : t("top.tagline")}</div>
       </div>
+      <LangSwitch locale={locale} label={t("lang.label")} />
       {user && (
-        <Link href="/switch" aria-label="Switch family member" className="grid size-10 place-items-center rounded-full bg-surface text-sm font-bold text-accent shadow-[0_1px_2px_rgba(12,27,61,0.08)]">
+        <Link href="/switch" aria-label="Switch family member" className="glass grid size-10 place-items-center rounded-full text-sm font-bold text-accent">
           {user.name[0]}
         </Link>
       )}
@@ -53,14 +56,17 @@ async function TopBar() {
 }
 
 async function Nav() {
-  return (await currentUserId()) ? <BottomNav /> : null;
+  if (!(await currentUserId())) return null;
+  const { t } = await getT();
+  const labels = { home: t("nav.home"), pay: t("nav.pay"), protect: t("nav.protect"), track: t("nav.track"), money: t("nav.money"), family: t("nav.family"), ai: t("nav.ai") };
+  return <BottomNav labels={labels} />;
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} h-full antialiased`}>
+    <html lang="en" style={{ colorScheme: "dark" }} className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full">
-        <div className="app-shell flex flex-col pb-28 max-md:pb-42">
+        <div className="app-shell flex flex-col pb-42 md:pb-8">
           <Suspense fallback={<div className="h-16" />}>
             <TopBar />
           </Suspense>
@@ -72,9 +78,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               {children}
             </Suspense>
           </main>
-          <footer className="px-5 pb-4 text-center text-xs text-muted">
-            Independent demo built on the PayPal developer platform. Not affiliated with PayPal. Amounts are estimates.
-          </footer>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
         </div>
         <Suspense fallback={null}>
           <Nav />
@@ -83,6 +89,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </body>
     </html>
   );
+}
+
+async function Footer() {
+  const { t } = await getT();
+  return <footer className="px-5 pb-4 text-center text-xs text-muted">{t("footer")}</footer>;
 }
 
 async function ModeBadges() {
