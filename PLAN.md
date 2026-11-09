@@ -231,3 +231,21 @@ Pay, Protect, Track, AI are now tab pages with their own status labels (pattern:
 - Assistant: rule-based (no `ANTHROPIC_API_KEY`/Gemini on Netlify). Agent messages and tool UIs inside Pay/Protect/Track are English only.
 
 **Next session: Block 9.** 1) push the polish commit (both branches) and confirm deploy is `ready`. 2) Fix the home-vs-demo number mismatch. 3) Mobile 390px click-through of every section (Chrome resize doesn't work; use the iframe method in the testing note), console clean. 4) Browser-only paths: QR upload/camera, Proof Vault upload, dispute PDF download, privacy radio, budget edit, goal add. 5) Refresh DESIGN.md.
+
+## Session Handoff (2026-11-09, night)
+
+**Live:** https://payhub-ai-demo-gopinath.netlify.app, deployed from GitHub (`main` pushed to both `main` and `master`). All commits below are pushed and live.
+
+**Done this session**
+- Pushed polish commit `92c0a75`; deploy confirmed `ready`.
+- `8cc26ab` fix(home): hero now reads `monthSummary` + sum of `budgets()` from `DEMO_PAYMENTS` (₹51,436 for Arun), matching Money/Family/Track. Family avatars and recent rows on Home still read the DB.
+- Mobile QA on the live site: 31 routes in a 390x844 same-origin iframe. No horizontal overflow, console clean. Visually checked `/`, `/protect?qr=scam`, `/chat`, `/ai/command`, plus headless 390px screenshots of every section screen.
+- `7c23dc2` fix(nav): Home is now the first bottom-nav tab (PWA had no way home but the logo); AI tab active on `/chat`; language select fills its 40px pill; privacy radios `shrink-0`.
+- Build report PDF (11 pages: cover, Home/Demo, six sections with 390px live screenshots + status labels, tech stack, architecture diagram, done/pending) at `docs/PayHub-AI-Build-Report.pdf`. **Local only, not committed**: excluded via `.git/info/exclude`. Generator scripts (puppeteer-core + system Chrome) live in this session's scratchpad, not the repo.
+
+**Still pending**
+- Must: real PayPal sandbox keys → real payment + webhook on live URL; record <3 min YouTube video; Devpost submit before 2026-11-12 12:00 pm PST; re-read rules; README real vs simulated.
+- Should: AI key on Netlify (assistant is rule-based); browser-only checks (QR camera on real phone, Proof Vault upload, dispute PDF download, budget edit, goal add); translate text inside Pay/Protect/Track tools and agent messages.
+- Could: refresh DESIGN.md (old light theme); member colours for family bars; noisy duplicate warning in agent runs; Netlify "Powered by" badge overlaps bottom of the mobile screen (site setting, not app code).
+
+**Next session:** user adds PayPal sandbox keys to Netlify env → test real payment; then browser-only checks; then README + video + Devpost.
