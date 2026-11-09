@@ -174,7 +174,8 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - **Block 4 Pay** (`620b134`): `src/lib/pay.ts` (Zod inputs + `intlCost`, `smartRoute`, `largeCheck`, `RAILS` limits/fees, `zodMessages`), `getInrRates()` in `fx.ts` (USD/EUR/GBP/SGD/AUD, Frankfurter, fallback table), client tools in `src/components/pay/tools.tsx`, `/pay?tool=copilot|router|intl|large` tabs with status labels (Copilot needs sign-in, others don't). Router: `?risky=1` pre-flags payee. International scenario now opens `/pay?tool=intl&price=85&cur=USD`. Limits used: UPI ₹1L (₹5L tax/hospital/education), new UPI payee ₹5k first 24h, IMPS ₹5L, RTGS min ₹2L; all labelled as typical, bank may differ. Test `tests/pay.test.ts`.
 - **Block 5 Protect** (`dc8bfef`): `src/lib/protect.ts` (`parseUpi`, `checkQr` via Fraud agent, `checkPaymentLink` for https + upi links: shorteners, @ tricks, .apk, lure words; `COLLECT_REQUESTS` + `judgeCollect`; `merchantTrust` for website or UPI ID using payment history; `OTP_QUIZ`). UI `src/components/protect/tools.tsx`; `/protect?tool=link|qr|collect|otp|trust`, `?qr=scam|safe` opens QR tab with result. QR: image upload + camera, both decoded with `jsqr@1.4.0` (new dep) on a canvas; jsQR decode of the scam payload verified in node. High-risk results link to `/pay?tool=router&risky=1`. Test `tests/protect.test.ts`. Camera path not tried on a real phone.
 - **Block 6 Track** (`f8093a1`): `src/lib/track.ts` (`trackList` problem-first per member, `duplicateIds`, `issueFor`, `timeline` with est. credit date, `buildDispute` via Proof + Dispute agents, `clock()` to satisfy react-hooks/purity lint). `/track?tool=tracker|vault|dispute&txn=<id>`: tracker shows "Don't pay again", amount debited, txn ID, refund steps + ETA, Build dispute / Add proof. Proof Vault: auto receipts for every payment + screenshot/invoice/PDF uploads (≤1.5 MB) kept in this browser's localStorage (`payhub_vault`). Dispute: editable draft, copy text, Download PDF via `jspdf@4.2.1` (new dep, dynamic import, ₹ → "Rs." since base fonts lack it). Viewer = signed-in member, else Arun. Test `tests/track.test.ts`.
-- Checks: 62 tests, typecheck, `npx eslint src tests`, `next build` all pass. Every block verified by curl on `next start`, NOT visually in a browser yet.
+- **Block 7 Money + Family**: `src/lib/money.ts` (`monthSummary`, `subscriptions` with family overlap, `duplicateGroups`, `budgets` with overrides, `DEMO_GOALS` + `goalSchema` + `monthsToGoal`, `DEMO_ACCOUNTS` + `netWorth`, `lrs` with USD 250k limit + ₹10L TCS threshold parsed from item price text, `familyView(viewer, privacy)` + `privateItems`). `/money?tool=summary|subs|dups|budgets|goals|worth|lrs` (`?focus=duplicates` opens dups, links to dispute/tracker). `/family?view=individual|family|private|privacy`. Privacy per member: share items / category totals / total only, stored in cookie `payhub_privacy` via `POST /api/privacy` (member edits only their own), server applies it; private items always collapse into one "Private" total for others. Budget limits and goals edits live in localStorage (`payhub_budgets_<id>`, `payhub_goals_<id>`). Helpers `getPrivacy()`, `viewer()` in `src/lib/money-server.ts`. Client UI `src/components/money/tools.tsx`. Strings in EN/TA/HI. Test `tests/money.test.ts`. Gotcha: zod 4 `z.record(z.enum…)` is exhaustive; use `z.partialRecord`.
+- Checks: 73 tests, typecheck, `npx eslint src tests`, `next build` all pass. Every block verified by curl on `next start`, NOT visually in a browser yet.
 - Nothing pushed, nothing deployed since `3ddf02e` (local `main` is 8 commits ahead of `origin/main`).
 
 **Not verified yet (do in QA block)**
@@ -186,19 +187,19 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Only tab names, headings and descriptions are translated; text inside the Pay/Protect/Track tools and agent messages is English only.
 - Track and Protect read demo data only (not the DB transactions from real PayPal checkouts).
 - Budget agent adds a duplicate-charge warning in every workflow that reads Arun's month (e.g. international); harmless but noisy.
-- Home and `SectionPage` feature lists for Money, Family still say "Coming soon" until Block 7.
+- Net worth is sample balances (labelled Prototype); no Account Aggregator link.
 
 **Decisions from user (2026-11-09)**
 - Gemini key: later. Keep rule-based assistant until then.
 - Deploy: approved CLI `npx netlify deploy --build --prod` (do it in QA block).
 - Teammate's 33-feature list: proceed without it; cross-check when it arrives.
 
-**Next session: start Block 7.** Remaining blocks, in order (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
+**Next session: start Block 8 (Assistant).** Remaining blocks, in order (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
 3. ~~AI layer~~ done. Block 8 Assistant should call `src/lib/agents/agents.ts` functions as its tools.
 4. ~~Pay~~ done.
 5. ~~Protect~~ done.
 6. ~~Track~~ done.
-7. Money + Family: duplicates (`?focus=duplicates`), subscriptions, budgets, goals, net worth, LRS; per-member privacy settings.
+7. ~~Money + Family~~ done. Was: duplicates (`?focus=duplicates`), subscriptions, budgets, goals, net worth, LRS; per-member privacy settings.
 8. Assistant: chat with tools over all modules, replies in 3 languages (rule-based now).
 9. Polish, then QA (390px + desktop click-through, console clean) and deploy.
 Pay, Protect, Track, AI are now tab pages with their own status labels (pattern: `TOOLS` array + `?tool=` + `StatusLabel`, see `src/app/pay/page.tsx`); copy that for Money and Family. New UI strings go in all three dicts.
