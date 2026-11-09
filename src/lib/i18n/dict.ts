@@ -58,6 +58,12 @@ const en = {
   "protect.collect.desc": "Practise spotting UPI collect requests that take money instead of sending it.",
   "protect.otp.desc": "Five quick questions on the tricks scammers use.",
   "protect.trust.desc": "How safe a shop or UPI ID looks, and why.",
+  "track.tracker": "Payment Tracker",
+  "track.vault": "Proof Vault",
+  "track.dispute": "Dispute",
+  "track.tracker.desc": "Status, amount debited, refund progress and the date your money should be back.",
+  "track.vault.desc": "Receipts and transaction IDs are saved for you. Add screenshots and invoices.",
+  "track.dispute.desc": "A ready-to-send complaint with your proof, as text or a PDF.",
 };
 export type Key = keyof typeof en;
 
@@ -116,6 +122,12 @@ const ta: Record<Key, string> = {
   "protect.collect.desc": "பணம் அனுப்புவதற்குப் பதிலாக எடுக்கும் UPI கலெக்ட் கோரிக்கைகளைக் கண்டறியப் பழகுங்கள்.",
   "protect.otp.desc": "மோசடியாளர்களின் தந்திரங்கள் பற்றி ஐந்து விரைவு கேள்விகள்.",
   "protect.trust.desc": "ஒரு கடை அல்லது UPI ID எவ்வளவு பாதுகாப்பானது, ஏன்.",
+  "track.tracker": "பணம் கண்காணிப்பு",
+  "track.vault": "ஆதாரப் பெட்டகம்",
+  "track.dispute": "புகார்",
+  "track.tracker.desc": "நிலை, கழிக்கப்பட்ட தொகை, ரீஃபண்ட் முன்னேற்றம், பணம் திரும்பும் தேதி.",
+  "track.vault.desc": "ரசீதுகளும் பரிவர்த்தனை ID-களும் சேமிக்கப்படுகின்றன. ஸ்கிரீன்ஷாட், விலைப்பட்டியல் சேர்க்கலாம்.",
+  "track.dispute.desc": "உங்கள் ஆதாரத்துடன் அனுப்பத் தயாரான புகார், உரையாக அல்லது PDF ஆக.",
 };
 
 const hi: Record<Key, string> = {
@@ -173,6 +185,12 @@ const hi: Record<Key, string> = {
   "protect.collect.desc": "पैसा भेजने की जगह पैसा लेने वाले UPI कलेक्ट अनुरोध पहचानने का अभ्यास करें।",
   "protect.otp.desc": "ठगों की चालों पर पाँच छोटे सवाल।",
   "protect.trust.desc": "कोई दुकान या UPI ID कितनी सुरक्षित लगती है, और क्यों।",
+  "track.tracker": "पेमेंट ट्रैकर",
+  "track.vault": "प्रूफ़ वॉल्ट",
+  "track.dispute": "शिकायत",
+  "track.tracker.desc": "स्थिति, कटी हुई राशि, रिफ़ंड की प्रगति और पैसा वापस आने की तारीख।",
+  "track.vault.desc": "रसीदें और ट्रांज़ैक्शन ID अपने आप सहेजी जाती हैं। स्क्रीनशॉट और बिल जोड़ें।",
+  "track.dispute.desc": "आपके सबूत के साथ भेजने लायक शिकायत, टेक्स्ट या PDF में।",
 };
 
 export const DICTS: Record<Locale, Record<Key, string>> = { en, ta, hi };
