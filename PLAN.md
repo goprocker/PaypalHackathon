@@ -170,7 +170,8 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Plan committed (`1c77f40`).
 - **Block 1 Foundation** (`c2e7108`): six-section nav (bottom nav mobile, glass sidebar md+ with Home), pages `/protect` `/track` `/money` `/family` `/ai` listing features with status labels (existing screens linked as Live, rest "Coming soon"), `StatusLabel` component (`src/components/status-label.tsx`), i18n EN/TA/HI (`src/lib/i18n/dict.ts`, `getT()` in `src/lib/i18n/server.ts`, cookie `payhub_lang`, `POST /api/lang`, picker in top bar), dark navy single theme + `.glass` utility in `globals.css`. `SectionPage` component in `src/components/section-page.tsx`.
 - **Block 2 Demo Mode** (`50c5212`): `src/lib/demo/data.ts` = 58 payments (Arun/Mom/Dad) with method, txnId, payee VPA, status, private flag; scenario rows `s_failed`, `s_refund`, `s_refunded`, `s_dup1/2`, `s_pending`, `s_forex`, `s_rejected`; `SCAM_QR` / `SAFE_QR`; six `SCENARIOS` with target hrefs (`/track?txn=…`, `/money?focus=duplicates`, `/protect?qr=scam`, `/family`, `/pay`). `POST /api/demo` sets cookie `payhub_scenario` (auto-signs in as `u_me`), `activeScenario()` in `src/lib/demo/server.ts`, `/demo` page with picker, banner + exit in layout, Demo Mode link on Home. Test `tests/demo.test.ts`.
-- Checks: 39 tests, typecheck, `npx eslint src tests`, `next build` all pass. Verified by curl on `next start`, NOT visually in a browser yet.
+- **Block 3 AI layer**: `src/lib/agents/log.ts` (`ActivityLog`, `AGENTS`, `AGENT_INFO`, event kinds start/result/handoff/warn/block), `agents.ts` (Fraud QR/link/collect, FX cost, Budget + `findDuplicates`, Router blocks unsafe methods, Verdict via `ruleVerdict`, simulated Payment, Tracker with refund ETA + "Don't pay again", Proof, Dispute draft, Assistant explain), `workflows.ts` (`runWorkflow(id, {usdInr, now})` for scam_qr, safe_qr, international, failed, refund, duplicate, family). Command Centre at `/ai/command?run=<id>` (defaults to active scenario), linked from `/ai` as Interactive demo. `cc.*` strings in EN/TA/HI. Test `tests/agents.test.ts`. International lamp correctly gets NOT WORTH IT (Shopping 157%), so Payment holds it.
+- Checks: 45 tests, typecheck, `npx eslint src tests`, `next build` all pass. Verified by curl on `next start`, NOT visually in a browser yet.
 - Nothing pushed, nothing deployed since `3ddf02e`.
 
 **Decisions from user (2026-11-09)**
@@ -179,7 +180,7 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Teammate's 33-feature list: proceed without it; cross-check when it arrives.
 
 **Remaining blocks, in order** (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
-3. AI layer: typed agents in `src/lib/agents/` (Fraud, FX/Cost, Budget, Router, Verdict, Payment, Tracker, Proof, Dispute) emitting to a shared activity log; Command Centre on `/ai`.
+3. ~~AI layer~~ done. Block 8 Assistant should call `src/lib/agents/agents.ts` functions as its tools.
 4. Pay: Smart Payment Router, International Calculator, Large Payment check.
 5. Protect: link checker, QR scan (upload + camera), collect-request simulator, OTP quiz, Merchant Trust Score; `?qr=scam` triggers warnings.
 6. Track: Payment Tracker (`?txn=`), Proof Vault, dispute draft + PDF, "Don't pay again".

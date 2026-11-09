@@ -32,6 +32,13 @@ const en = {
   "ai.title": "AI",
   "ai.desc": "Agents that work together, and an assistant that can use all of them.",
   "footer": "Independent demo built on the PayPal developer platform. Not affiliated with PayPal. Amounts are estimates.",
+  "cc.title": "AI Command Centre",
+  "cc.desc": "Pick a situation and watch the agents pass results to each other.",
+  "cc.agents": "Agents",
+  "cc.feed": "Activity",
+  "cc.answer": "Assistant says",
+  "cc.idle": "Not used",
+  "cc.ran": "Worked",
 };
 export type Key = keyof typeof en;
 
@@ -64,6 +71,13 @@ const ta: Record<Key, string> = {
   "ai.title": "AI",
   "ai.desc": "இணைந்து செயல்படும் முகவர்கள், அனைத்தையும் பயன்படுத்தும் உதவியாளர்.",
   "footer": "PayPal டெவலப்பர் தளத்தில் உருவான சுயாதீன டெமோ. PayPal உடன் தொடர்பில்லை. தொகைகள் மதிப்பீடுகள்.",
+  "cc.title": "AI கட்டளை மையம்",
+  "cc.desc": "ஒரு சூழலைத் தேர்ந்தெடுத்து, முகவர்கள் முடிவுகளை ஒருவருக்கொருவர் அனுப்புவதைப் பாருங்கள்.",
+  "cc.agents": "முகவர்கள்",
+  "cc.feed": "செயல்பாடு",
+  "cc.answer": "உதவியாளர் சொல்வது",
+  "cc.idle": "பயன்படுத்தப்படவில்லை",
+  "cc.ran": "செயல்பட்டது",
 };
 
 const hi: Record<Key, string> = {
@@ -95,6 +109,13 @@ const hi: Record<Key, string> = {
   "ai.title": "AI",
   "ai.desc": "साथ काम करने वाले एजेंट, और एक सहायक जो सबका उपयोग कर सकता है।",
   "footer": "PayPal डेवलपर प्लेटफ़ॉर्म पर बना स्वतंत्र डेमो। PayPal से संबद्ध नहीं। राशियाँ अनुमान हैं।",
+  "cc.title": "AI कमांड सेंटर",
+  "cc.desc": "एक स्थिति चुनें और देखें कि एजेंट एक-दूसरे को नतीजे कैसे देते हैं।",
+  "cc.agents": "एजेंट",
+  "cc.feed": "गतिविधि",
+  "cc.answer": "सहायक कहता है",
+  "cc.idle": "उपयोग नहीं हुआ",
+  "cc.ran": "काम किया",
 };
 
 export const DICTS: Record<Locale, Record<Key, string>> = { en, ta, hi };

@@ -6,7 +6,7 @@ export default function AiPage() {
       section="ai"
       features={[
         { title: "Ask AI", desc: "Chat about your spending and payments.", status: "live", href: "/chat" },
-        { title: "AI Command Centre", desc: "Watch the agents work and hand results to each other.", status: "soon" },
+        { title: "AI Command Centre", desc: "Watch the agents work and hand results to each other.", status: "demo", href: "/ai/command" },
       ]}
     />
   );
