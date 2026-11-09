@@ -165,17 +165,29 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Mobile check at 390px on live site: no horizontal overflow on `/`, `/switch`, `/pay`, `/hub`, `/hub?view=family`, `/chat`. Only issues: Netlify badge covering bottom nav, 16x16 duty checkbox on `/pay`.
 - Fixed both in `3ddf02e` (pushed): nav `max-md:pb-[calc(env(safe-area-inset-bottom)+3.5rem)]`, app shell `max-md:pb-42`, checkbox label `min-h-11`, box `size-5`. `npm run build` passes.
 - Wrote the upgrade plan at the top of this file (six sections, connected agents, timeboxed schedule).
+- `3ddf02e` still not live (Netlify not linked to GitHub; manual CLI deploys).
 
-**Not done / blockers**
-- `3ddf02e` is NOT live: Netlify is not linked to GitHub (deploys have `commit_ref: null`, all manual CLI). Needs user OK for `npx netlify deploy --build --prod`, or user links repo in Netlify dashboard.
-- Post-deploy mobile recheck not run (badge clearance, checkbox, full click-through of flows, console errors).
-- `PLAN.md` changes uncommitted.
-- Teammate's 33-feature list not received; plan maps to `PRD.md` F1.1–F6.3 (34 items).
-- `GEMINI_API_KEY` not set; Gemini provider still not built (`verdict.ts`, `chat.ts`, layout badge check only Anthropic).
+- Plan committed (`1c77f40`).
+- **Block 1 Foundation** (`c2e7108`): six-section nav (bottom nav mobile, glass sidebar md+ with Home), pages `/protect` `/track` `/money` `/family` `/ai` listing features with status labels (existing screens linked as Live, rest "Coming soon"), `StatusLabel` component (`src/components/status-label.tsx`), i18n EN/TA/HI (`src/lib/i18n/dict.ts`, `getT()` in `src/lib/i18n/server.ts`, cookie `payhub_lang`, `POST /api/lang`, picker in top bar), dark navy single theme + `.glass` utility in `globals.css`. `SectionPage` component in `src/components/section-page.tsx`.
+- **Block 2 Demo Mode** (`50c5212`): `src/lib/demo/data.ts` = 58 payments (Arun/Mom/Dad) with method, txnId, payee VPA, status, private flag; scenario rows `s_failed`, `s_refund`, `s_refunded`, `s_dup1/2`, `s_pending`, `s_forex`, `s_rejected`; `SCAM_QR` / `SAFE_QR`; six `SCENARIOS` with target hrefs (`/track?txn=…`, `/money?focus=duplicates`, `/protect?qr=scam`, `/family`, `/pay`). `POST /api/demo` sets cookie `payhub_scenario` (auto-signs in as `u_me`), `activeScenario()` in `src/lib/demo/server.ts`, `/demo` page with picker, banner + exit in layout, Demo Mode link on Home. Test `tests/demo.test.ts`.
+- Checks: 39 tests, typecheck, `npx eslint src tests`, `next build` all pass. Verified by curl on `next start`, NOT visually in a browser yet.
+- Nothing pushed, nothing deployed since `3ddf02e`.
 
-**Tomorrow (2026-11-10), in order**
-1. Deploy path decided → deploy `3ddf02e` → mobile recheck.
-2. Follow the build-day schedule above (09:00–20:30), cut list if late.
-3. End of day: full mobile + desktop click-through on live site, deploy, update this handoff.
+**Decisions from user (2026-11-09)**
+- Gemini key: later. Keep rule-based assistant until then.
+- Deploy: approved CLI `npx netlify deploy --build --prod` (do it in QA block).
+- Teammate's 33-feature list: proceed without it; cross-check when it arrives.
+
+**Remaining blocks, in order** (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
+3. AI layer: typed agents in `src/lib/agents/` (Fraud, FX/Cost, Budget, Router, Verdict, Payment, Tracker, Proof, Dispute) emitting to a shared activity log; Command Centre on `/ai`.
+4. Pay: Smart Payment Router, International Calculator, Large Payment check.
+5. Protect: link checker, QR scan (upload + camera), collect-request simulator, OTP quiz, Merchant Trust Score; `?qr=scam` triggers warnings.
+6. Track: Payment Tracker (`?txn=`), Proof Vault, dispute draft + PDF, "Don't pay again".
+7. Money + Family: duplicates (`?focus=duplicates`), subscriptions, budgets, goals, net worth, LRS; per-member privacy settings.
+8. Assistant: chat with tools over all modules, replies in 3 languages (rule-based now).
+9. Polish, then QA (390px + desktop click-through, console clean) and deploy.
+Then flip each feature's status label from "Coming soon" as it ships. Only top bar, nav, section headers, footer are translated so far; new UI strings go in all three dicts.
+
+**Notes:** `npm run lint` also scans `.agents/` bundles (thousands of unrelated errors); lint with `npx eslint src tests`. Stop test servers by port, not `taskkill node.exe` (blocked).
 
 **Testing note:** Chrome `resize_window` did not shrink the viewport; test mobile by injecting a 390x844 same-origin iframe and measuring `scrollWidth` / element rects / tap-target sizes.
