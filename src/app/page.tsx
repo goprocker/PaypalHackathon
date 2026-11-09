@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 const EXAMPLE_CENTS = 12999;
 const example = trueCost({ priceCents: EXAMPLE_CENTS, usdInr: config.fallbackUsdInr });
 
-const AVATAR_TINTS = ["bg-[#d9e6ff] text-[#1a3f9c]", "bg-[#d5f2e6] text-[#0f6b52]", "bg-[#fdeec2] text-[#80560a]", "bg-[#e6dcfb] text-[#5a3fb0]"];
+const AVATAR_TINTS = ["bg-accent-fill/20 text-accent ring-1 ring-accent/30", "bg-good/15 text-good ring-1 ring-good/30", "bg-warn/15 text-warn ring-1 ring-warn/30", "bg-private/15 text-private ring-1 ring-private/30"];
 
 const ACTIONS = [
   { href: "/pay", label: "Check price", icon: ScanSearch },
@@ -50,7 +50,7 @@ function Dashboard({ data }: { data: NonNullable<Awaited<ReturnType<typeof famil
             {over ? `Over budget by ${formatInr(-s.budgetLeftPaise)}` : `${formatInr(s.budgetLeftPaise)} left of ${formatInr(s.budgetPaise)}`}
           </p>
           <div className="mt-3 h-1.5 w-full max-w-60 rounded-full bg-white/20" role="progressbar" aria-valuenow={usedPct} aria-valuemin={0} aria-valuemax={100} aria-label="Monthly budget used">
-            <div className={cn("h-1.5 rounded-full", over ? "bg-[#ff9b92]" : "bg-white")} style={{ width: `${Math.min(100, usedPct)}%` }} />
+            <div className={cn("h-1.5 rounded-full", over ? "bg-bad" : "bg-white")} style={{ width: `${Math.min(100, usedPct)}%` }} />
           </div>
           <Link href="/pay" className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-navy">
             Check a purchase <ArrowUpRight aria-hidden className="size-4" />
@@ -82,7 +82,7 @@ function Dashboard({ data }: { data: NonNullable<Awaited<ReturnType<typeof famil
         <ul className="grid grid-cols-4 gap-3">
           {ACTIONS.map(({ href, label, icon: Icon }) => (
             <li key={label}>
-              <Link href={href} className="flex h-full min-h-24 flex-col items-center justify-center gap-2 glass rounded-2xl px-1 py-3 text-center text-xs font-medium shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+              <Link href={href} className="flex h-full min-h-24 flex-col items-center justify-center gap-2 glass rounded-2xl px-1 py-3 text-center text-xs font-medium">
                 <Icon aria-hidden className="size-6 text-accent" />
                 {label}
               </Link>
@@ -91,7 +91,7 @@ function Dashboard({ data }: { data: NonNullable<Awaited<ReturnType<typeof famil
         </ul>
       </section>
 
-      <section className="rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+      <section className="rounded-2xl glass p-5 ">
         <h2 className="text-base font-semibold">Latest payments</h2>
         {recent.length === 0 ? (
           <p className="py-4 text-sm text-muted">No payments yet this month.</p>
@@ -136,7 +136,7 @@ function Welcome() {
         <span className="flex-1"><span className="block font-semibold">Demo Mode</span><span className="block text-sm text-muted">Load a ready-made scenario in one tap</span></span>
         <ArrowUpRight aria-hidden className="size-4 text-muted" />
       </Link>
-      <figure className="rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+      <figure className="rounded-2xl glass p-5 ">
         <figcaption className="flex items-baseline justify-between text-sm text-muted">
           <span>Wireless headphones, {formatUsd(EXAMPLE_CENTS)}</span>
           <span className="tabular">₹{config.fallbackUsdInr}/USD</span>

@@ -42,7 +42,7 @@ export default async function CommandCentrePage({ searchParams }: { searchParams
             aria-current={w.id === id ? "page" : undefined}
             className={cn(
               "inline-flex min-h-11 items-center rounded-full border px-4 text-sm transition-colors",
-              w.id === id ? "border-accent bg-accent text-on-accent" : "glass hover:border-accent/50",
+              w.id === id ? "border-accent/50 bg-accent-fill/20 font-semibold text-text" : "glass text-muted hover:text-text",
             )}
           >
             {w.title}

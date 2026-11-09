@@ -37,7 +37,7 @@ export default async function PayPage({ searchParams }: { searchParams: Promise<
         <p className="mt-1 text-sm text-muted">{t("pay.desc")}</p>
       </header>
 
-      <nav aria-label={t("pay.title")} className="-mx-4 overflow-x-auto px-4">
+      <nav aria-label={t("pay.title")} className="no-scrollbar -mx-4 overflow-x-auto px-4">
         <ul className="flex w-max gap-2">
           {TOOLS.map((x) => (
             <li key={x.id}>
@@ -46,7 +46,7 @@ export default async function PayPage({ searchParams }: { searchParams: Promise<
                 aria-current={x.id === tool ? "page" : undefined}
                 className={cn(
                   "inline-flex min-h-11 items-center rounded-full border px-4 text-sm whitespace-nowrap transition-colors",
-                  x.id === tool ? "border-accent bg-accent text-on-accent" : "glass hover:border-accent/50",
+                  x.id === tool ? "border-accent/50 bg-accent-fill/20 font-semibold text-text" : "glass text-muted hover:text-text",
                 )}
               >
                 {t(`pay.${x.id}`)}

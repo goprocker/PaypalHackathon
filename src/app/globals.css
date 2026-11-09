@@ -2,24 +2,30 @@
 
 /* Dark navy, electric blue. One theme on purpose. */
 :root {
-    --bg: #070d1f;
-    --surface: #121c3b;
-    --surface-2: #1b2750;
-    --text: #eaf0ff;
-    --muted: #9fb0d6;
-    --border: #27345f;
-    --primary: #3d7bff;
-    --primary-fg: #0a1228;
-    --accent: #4d8bff;
-    --navy: #0f2f7a;
-    --navy-2: #2a63e8;
-    --good: #3cc8a6;
-    --warn: #f0b33a;
-    --bad: #f07a6f;
-    --private: #a990f2;
-    --on-accent: #0a1228;
-    --cat-groceries: #3cc8a6; --cat-bills: #8f9ce0; --cat-shopping: #e585a8; --cat-food: #f0b33a;
-    --cat-subscriptions: #f07a6f; --cat-friends: #5cc6d8; --cat-other: #9aa3c7; --cat-personal: #a990f2;
+    /* Layered navy: ground, raised surface, inset/track. Hue held at ~228° so layers read as one material. */
+    --bg: #080e1e;
+    --surface: #0f1830;
+    --surface-2: #17223f;
+    --raise: #1d2a4d;
+    --text: #e8eeff;
+    --muted: #93a3c8;
+    --border: #212e52;
+    --border-strong: #2e3d68;
+    /* One electric blue. Fill carries white text (5.0:1); the lighter tint is for text and icons on navy. */
+    --primary: #2f6bf5;
+    --primary-fg: #ffffff;
+    --accent: #78a4ff;
+    --accent-fill: #2f6bf5;
+    --navy: #10265f;
+    --navy-2: #2f6bf5;
+    /* Status: calmer than neon, each ≥4.5:1 on --surface. */
+    --good: #46c79f;
+    --warn: #eab14a;
+    --bad: #f28b80;
+    --private: #b19bf5;
+    --on-accent: #ffffff;
+    --cat-groceries: #46c79f; --cat-bills: #8e9de6; --cat-shopping: #e88fb0; --cat-food: #eab14a;
+    --cat-subscriptions: #f28b80; --cat-friends: #62c3d6; --cat-other: #8d97bd; --cat-personal: #b19bf5;
   }
 
 @theme inline {
@@ -32,6 +38,9 @@
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
   --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-raise: var(--raise);
+  --color-border-strong: var(--border-strong);
   --color-navy: var(--navy);
   --color-navy-2: var(--navy-2);
   --color-on-accent: var(--on-accent);
@@ -47,7 +56,8 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-h1, h2 { letter-spacing: -0.02em; }
+h1, h2, h3 { letter-spacing: -0.02em; text-wrap: balance; }
+h1 { letter-spacing: -0.03em; }
 
 .tabular { font-variant-numeric: tabular-nums; }
 
@@ -67,8 +77,21 @@ html { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
 body { padding-top: env(safe-area-inset-top); }
 .app-shell { margin-inline: auto; width: 100%; max-width: 480px; min-height: 100dvh; }
 @media (min-width: 768px) { .app-shell { max-width: 1040px; padding-left: 15rem; } }
-body { background: radial-gradient(1200px 600px at 80% -10%, rgba(61,123,255,0.18), transparent 60%), var(--bg); background-attachment: fixed; }
-/* Glass card: translucent surface over the navy backdrop. */
-.glass { background: color-mix(in oklab, var(--surface) 72%, transparent); border: 1px solid color-mix(in oklab, var(--border) 80%, transparent); backdrop-filter: blur(14px); }
+body { background: var(--bg); }
+/* Card surface. Solid navy with a hairline and a faint top light; no blur, no glow. Class name kept for existing markup. */
+.glass {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 100%, white 2.5%), var(--surface));
+  border: 1px solid var(--border);
+}
+a.glass:hover, button.glass:hover { border-color: var(--border-strong); background: var(--raise); }
+
+/* Browser surfaces, themed from the palette. */
+::selection { background: color-mix(in oklab, var(--accent-fill) 55%, transparent); color: #fff; }
+html { caret-color: var(--accent); scrollbar-color: var(--border-strong) var(--bg); accent-color: var(--accent-fill); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; border: 2px solid var(--bg); }
+a { text-underline-offset: 3px; }
+input::placeholder { color: color-mix(in oklab, var(--muted) 80%, var(--bg)); }
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

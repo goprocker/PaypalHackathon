@@ -34,8 +34,9 @@ export function BottomNav({ labels }: { labels: NavLabels }) {
               key={href}
               href={href}
               aria-current={on ? "page" : undefined}
-              className={cn("flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium text-muted", on && "font-bold text-text")}
+              className={cn("relative flex min-h-14 min-w-0 flex-1 flex-col items-center justify-center gap-1 text-[10px] font-medium text-muted transition-colors hover:text-text", on && "font-bold text-text")}
             >
+              {on && <span aria-hidden className="absolute inset-x-4 top-0 h-0.5 rounded-full bg-accent" />}
               <Icon aria-hidden className={cn("size-5", on && "text-accent")} strokeWidth={on ? 2.4 : 1.8} />
               <span className="max-w-full truncate">{labels[key]}</span>
             </Link>
@@ -50,7 +51,7 @@ export function BottomNav({ labels }: { labels: NavLabels }) {
               key={href}
               href={href}
               aria-current={on ? "page" : undefined}
-              className={cn("flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium text-muted hover:bg-surface-2 hover:text-text", on && "bg-accent/15 font-semibold text-text")}
+              className={cn("flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium text-muted hover:bg-surface-2 hover:text-text", on && "bg-accent-fill/20 font-semibold text-text")}
             >
               <Icon aria-hidden className={cn("size-5", on && "text-accent")} />
               {labels[key]}

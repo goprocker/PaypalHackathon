@@ -32,7 +32,7 @@ function useStored<T>(key: string, fallback: T) {
 function Bar({ pct, state }: { pct: number; state: "ok" | "near" | "over" }) {
   return (
     <div className="h-2 overflow-hidden rounded-full bg-surface-2" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-      <div className={cn("h-full rounded-full", state === "over" ? "bg-bad" : state === "near" ? "bg-warn" : "bg-accent")} style={{ width: `${Math.min(pct, 100)}%` }} />
+      <div className={cn("h-full rounded-full", state === "over" ? "bg-bad" : state === "near" ? "bg-warn" : "bg-accent-fill")} style={{ width: `${Math.min(pct, 100)}%` }} />
     </div>
   );
 }

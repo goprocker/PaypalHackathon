@@ -207,3 +207,27 @@ Pay, Protect, Track, AI are now tab pages with their own status labels (pattern:
 **Notes:** New deps this session: `jsqr@1.4.0`, `jspdf@4.2.1`. React Compiler lint (`react-hooks/purity`) rejects `Date.now()` in server components; use `clock()` from `src/lib/track.ts`. `npm run lint` also scans `.agents/` bundles (thousands of unrelated errors); lint with `npx eslint src tests`. Stop test servers by port, not `taskkill node.exe` (blocked).
 
 **Testing note:** Chrome `resize_window` did not shrink the viewport; test mobile by injecting a 390x844 same-origin iframe and measuring `scrollWidth` / element rects / tap-target sizes.
+
+## Session Handoff (2026-11-09, evening)
+
+**Live:** https://payhub-ai-demo-gopinath.netlify.app. Deploys now come from GitHub: Netlify production branch is still `master`, so push both: `git push origin main && git push origin main:master`. Local CLI deploy fails on Windows (symlink EPERM, Developer Mode off), don't use it. `netlify.toml` now sets `publish = ".next"` (UI value was repo root and broke the plugin). Check deploy state: `npx netlify api listSiteDeploys --data '{"site_id":"<from .netlify/state.json>","per_page":1}'`.
+
+**Done this session**
+- Block 7 Money + Family (`0f5ee01`), Netlify fix (`a7b5797`), Block 8 Assistant (`13ef0f9`), all described above.
+- Design polish pass (/impeccable, refinement of the dark navy + electric blue world), in the commit after this note:
+  - Tokens in `globals.css`: layered navy (`--bg` #080e1e, `--surface` #0f1830, `--surface-2`, new `--raise`, `--border-strong`); one electric blue split into `--accent-fill` #2f6bf5 (fills, white text ~4.8:1) and `--accent` #78a4ff (text/icons on navy). Status colours calmed. Tailwind: `bg-accent-fill`, `bg-raise`, `border-border-strong`.
+  - Rule: filled blue = action only. Use `bg-accent-fill text-on-accent` for buttons; `bg-accent` is now a light tint, never a button fill.
+  - `.glass` is now a solid navy card + hairline + faint top light (no blur, no radial page glow). Name kept so markup didn't change. Old light-theme shadows replaced by `glass`.
+  - Active section tabs are tinted (`border-accent/50 bg-accent-fill/20`), not solid blue; tab strips hide scrollbars. Bottom nav active tab gets a top indicator bar. Header blur removed.
+  - Browser surfaces themed: selection, caret, scrollbars, accent-color, placeholder, underline offset.
+  - Home avatars retinted for dark; chat composer no longer covers suggestions on desktop.
+  - Visually checked on desktop: `/`, `/money`, `/family`, `/chat`. NOT yet checked: 390px mobile, `/pay`, `/protect`, `/track`, `/ai/command`, `/demo`, `/switch`, `/hub`.
+- Checks: 79 tests, typecheck, `npx eslint src tests` clean.
+
+**Known issues to look at**
+- Home hero ("You spent in November" ₹18,946) reads the DB transactions while Money/Family/Track read `DEMO_PAYMENTS` (₹51,436 for Arun). Numbers disagree on screen; pick one source (likely demo data) before judging.
+- DESIGN.md still describes the old light "Pocket Wallet" theme and a phone-only column; the app is now dark single-theme with a desktop sidebar. Run `/impeccable document` to refresh it.
+- Family member bars use one flat light blue; consider member colours.
+- Assistant: rule-based (no `ANTHROPIC_API_KEY`/Gemini on Netlify). Agent messages and tool UIs inside Pay/Protect/Track are English only.
+
+**Next session: Block 9.** 1) push the polish commit (both branches) and confirm deploy is `ready`. 2) Fix the home-vs-demo number mismatch. 3) Mobile 390px click-through of every section (Chrome resize doesn't work; use the iframe method in the testing note), console clean. 4) Browser-only paths: QR upload/camera, Proof Vault upload, dispute PDF download, privacy radio, budget edit, goal add. 5) Refresh DESIGN.md.

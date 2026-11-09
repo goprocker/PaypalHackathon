@@ -59,7 +59,7 @@ export function Checkout({ mock, clientId }: { mock: boolean; clientId: string }
 
   return (
     <div className="grid gap-5">
-      <form onSubmit={check} className="space-y-4 self-start rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+      <form onSubmit={check} className="space-y-4 self-start rounded-2xl glass p-5 ">
         <Label>Product link
           <Input value={form.link} onChange={set("link")} inputMode="url" />
         </Label>

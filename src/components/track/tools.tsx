@@ -77,7 +77,7 @@ export function ProofVault({ receipts, initial }: { receipts: Receipt[]; initial
             <option value="other">Other</option>
           </Select>
         </Label>
-        <label className={cn("inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent text-sm font-semibold text-on-accent", busy && "opacity-60")}>
+        <label className={cn("inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-fill text-sm font-semibold text-on-accent", busy && "opacity-60")}>
           {busy ? <Loader2 aria-hidden className="size-4 animate-spin" /> : <Upload aria-hidden className="size-4" />} Choose file
           <input type="file" accept="image/*,application/pdf" className="sr-only" onChange={onFile} disabled={busy || !txnId} />
         </label>

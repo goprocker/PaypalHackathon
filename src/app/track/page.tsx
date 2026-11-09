@@ -58,7 +58,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Promis
         <p className="mt-1 text-sm text-muted">{t("track.desc")}</p>
       </header>
 
-      <nav aria-label={t("track.title")} className="-mx-4 overflow-x-auto px-4">
+      <nav aria-label={t("track.title")} className="no-scrollbar -mx-4 overflow-x-auto px-4">
         <ul className="flex w-max gap-2">
           {TOOLS.map((x) => (
             <li key={x.id}>
@@ -67,7 +67,7 @@ export default async function TrackPage({ searchParams }: { searchParams: Promis
                 aria-current={x.id === tool ? "page" : undefined}
                 className={cn(
                   "inline-flex min-h-11 items-center rounded-full border px-4 text-sm whitespace-nowrap transition-colors",
-                  x.id === tool ? "border-accent bg-accent text-on-accent" : "glass hover:border-accent/50",
+                  x.id === tool ? "border-accent/50 bg-accent-fill/20 font-semibold text-text" : "glass text-muted hover:text-text",
                 )}
               >
                 {t(`track.${x.id}`)}
@@ -163,7 +163,7 @@ function Tracker({ list, selected, now, date }: { list: ReturnType<typeof trackL
         </ol>
         <div className="flex flex-wrap gap-2">
           {issue && issue !== "refund_pending" && (
-            <Link href={`/track?tool=dispute&txn=${p.id}`} className="inline-flex h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-on-accent">Build dispute</Link>
+            <Link href={`/track?tool=dispute&txn=${p.id}`} className="inline-flex h-11 items-center rounded-full bg-accent-fill px-5 text-sm font-semibold text-on-accent">Build dispute</Link>
           )}
           <Link href={`/track?tool=vault&txn=${p.id}`} className="inline-flex h-11 items-center rounded-full border border-border px-5 text-sm font-semibold hover:bg-surface-2">Add proof</Link>
         </div>

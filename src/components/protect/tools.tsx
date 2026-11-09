@@ -149,7 +149,7 @@ export function QrScanner({ initial }: { initial?: "scam" | "safe" }) {
     <div className="grid gap-5 md:grid-cols-2">
       <div className={panel}>
         <div className="grid grid-cols-2 gap-2">
-          <label className={cn("inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-accent text-sm font-semibold text-on-accent", busy && "opacity-60")}>
+          <label className={cn("inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-fill text-sm font-semibold text-on-accent", busy && "opacity-60")}>
             {busy ? <Loader2 aria-hidden className="size-4 animate-spin" /> : <ImageUp aria-hidden className="size-4" />} Upload QR
             <input type="file" accept="image/*" className="sr-only" onChange={onFile} disabled={busy} />
           </label>

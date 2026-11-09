@@ -29,7 +29,7 @@ export default async function ProtectPage({ searchParams }: { searchParams: Prom
         <p className="mt-1 text-sm text-muted">{t("protect.desc")}</p>
       </header>
 
-      <nav aria-label={t("protect.title")} className="-mx-4 overflow-x-auto px-4">
+      <nav aria-label={t("protect.title")} className="no-scrollbar -mx-4 overflow-x-auto px-4">
         <ul className="flex w-max gap-2">
           {TOOLS.map((x) => (
             <li key={x.id}>
@@ -38,7 +38,7 @@ export default async function ProtectPage({ searchParams }: { searchParams: Prom
                 aria-current={x.id === tool ? "page" : undefined}
                 className={cn(
                   "inline-flex min-h-11 items-center rounded-full border px-4 text-sm whitespace-nowrap transition-colors",
-                  x.id === tool ? "border-accent bg-accent text-on-accent" : "glass hover:border-accent/50",
+                  x.id === tool ? "border-accent/50 bg-accent-fill/20 font-semibold text-text" : "glass text-muted hover:text-text",
                 )}
               >
                 {t(`protect.${x.id}`)}

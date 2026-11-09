@@ -37,17 +37,17 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
               : `${formatInr(s.budgetLeftPaise)} left of ${formatInr(s.budgetPaise)} across ${s.count} payments`}
           </p>
           <div className="mt-3 h-1.5 w-72 max-w-full rounded-full bg-surface-2" role="progressbar" aria-valuenow={usedPct} aria-valuemin={0} aria-valuemax={100} aria-label="Monthly budget used">
-            <div className={cn("h-1.5 rounded-full", over ? "bg-bad" : usedPct >= 80 ? "bg-warn" : "bg-accent")} style={{ width: `${Math.min(100, usedPct)}%` }} />
+            <div className={cn("h-1.5 rounded-full", over ? "bg-bad" : usedPct >= 80 ? "bg-warn" : "bg-accent-fill")} style={{ width: `${Math.min(100, usedPct)}%` }} />
           </div>
         </div>
-        <div role="tablist" aria-label="View" className="flex self-start rounded-full bg-surface p-1 text-sm shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+        <div role="tablist" aria-label="View" className="flex self-start rounded-full glass p-1 text-sm">
           {(["individual", "family"] as const).map((v) => (
             <Link
               key={v}
               role="tab"
               aria-selected={view === v}
               href={`/hub?view=${v}`}
-              className={cn("flex h-11 items-center rounded-full px-4 font-semibold", view === v ? "bg-accent text-on-accent" : "text-muted hover:text-text")}
+              className={cn("flex h-11 items-center rounded-full px-4 font-semibold", view === v ? "bg-accent-fill text-on-accent" : "text-muted hover:text-text")}
             >
               {v === "individual" ? "Just me" : "Whole family"}
             </Link>
@@ -96,7 +96,7 @@ export default async function HubPage({ searchParams }: PageProps<"/hub">) {
 }
 
 function BudgetBar({ category, spentPaise, limitPaise, pct }: { category: string; spentPaise: number; limitPaise: number; pct: number }) {
-  const color = pct >= 100 ? "bg-bad" : pct >= 80 ? "bg-warn" : "bg-accent";
+  const color = pct >= 100 ? "bg-bad" : pct >= 80 ? "bg-warn" : "bg-accent-fill";
   const note = pct >= 100 ? "Over budget" : pct >= 80 ? "Near limit" : "";
   return (
     <li>

@@ -33,7 +33,7 @@ export function ChatBox({ suggestions, agentNames }: { suggestions: string[]; ag
 
   return (
     <div className="space-y-4">
-      <div className="min-h-64 space-y-4" aria-live="polite">
+      <div className="min-h-64 space-y-4 pb-2" aria-live="polite">
         {turns.length === 0 && (
           <div className="space-y-2">
             <p className="text-sm text-muted">Try one of these:</p>
@@ -65,7 +65,7 @@ export function ChatBox({ suggestions, agentNames }: { suggestions: string[]; ag
         {busy && <div className="h-5 w-32 animate-pulse rounded bg-surface-2" aria-label="Thinking" />}
         {error && <p role="alert" className="text-sm text-bad">{error}</p>}
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); send(input); }} className={cn("sticky bottom-24 flex gap-2 rounded-2xl border border-border bg-surface p-2 shadow-[0_4px_16px_rgba(12,27,61,0.08)]")}>
+      <form onSubmit={(e) => { e.preventDefault(); send(input); }} className={cn("sticky bottom-24 md:bottom-4 flex gap-2 rounded-2xl border border-border bg-surface p-2 shadow-[0_8px_24px_rgba(0,0,0,0.4)]")}>
         <Input
           value={input}
           onChange={(e) => setInput(e.target.value)}

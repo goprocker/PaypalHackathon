@@ -39,7 +39,7 @@ async function TopBar() {
   const user = userId ? await getUser(userId) : null;
   const { locale, t } = await getT();
   return (
-    <header className="sticky top-0 z-30 flex items-center gap-3 bg-bg/80 px-5 py-3 backdrop-blur">
+    <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-border/60 bg-bg/95 px-5 py-3">
       <Link href="/" aria-label="PayHub AI home" className="glass grid size-10 place-items-center rounded-full">
         <Wallet aria-hidden className="size-5 text-accent" />
       </Link>
