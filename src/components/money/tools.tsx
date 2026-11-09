@@ -170,7 +170,7 @@ export function PrivacySetting({ current, name }: { current: Share; name: string
       <p className="flex items-center gap-2 font-semibold">What your family sees of {name}&apos;s spending {pending && <Loader2 aria-hidden className="size-4 animate-spin" />}</p>
       {(Object.keys(SHARE_TEXT) as Share[]).map((s) => (
         <label key={s} className={cn("flex min-h-14 cursor-pointer items-start gap-3 rounded-xl border p-3", current === s ? "border-accent bg-accent/10" : "border-border")}>
-          <input type="radio" name="share" className="mt-1 size-5 accent-[var(--accent)]" checked={current === s} onChange={() => change(s)} />
+          <input type="radio" name="share" className="mt-1 size-5 shrink-0 accent-[var(--accent)]" checked={current === s} onChange={() => change(s)} />
           <span><span className="block text-sm font-medium">{SHARE_TEXT[s][0]}</span><span className="block text-xs text-muted">{SHARE_TEXT[s][1]}</span></span>
         </label>
       ))}

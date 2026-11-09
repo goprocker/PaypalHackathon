@@ -17,7 +17,7 @@ export function LangSwitch({ locale, label }: { locale: Locale; label: string })
     <label className="glass flex h-10 items-center gap-1 rounded-full px-3 text-xs">
       <Languages aria-hidden className="size-4 text-accent" />
       <span className="sr-only">{label}</span>
-      <select value={locale} disabled={pending} onChange={(e) => change(e.target.value as Locale)} className="bg-transparent font-medium outline-none">
+      <select value={locale} disabled={pending} onChange={(e) => change(e.target.value as Locale)} className="h-full min-w-16 bg-transparent font-medium outline-none">
         {LOCALES.map((l) => (
           <option key={l} value={l} className="bg-surface">{LOCALE_NAMES[l]}</option>
         ))}

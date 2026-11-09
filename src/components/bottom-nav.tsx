@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-// Six sections. Home is reached from the logo on mobile and the sidebar on desktop.
+// Six sections, plus Home first in both navs.
 const SECTIONS = [
   { href: "/pay", key: "pay", icon: CreditCard },
   { href: "/protect", key: "protect", icon: ShieldCheck },
@@ -17,7 +17,7 @@ const SECTIONS = [
 
 export type NavLabels = Record<(typeof SECTIONS)[number]["key"] | "home", string>;
 
-const active = (path: string, href: string) => path === href || path.startsWith(`${href}/`);
+const active = (path: string, href: string) => path === href || path.startsWith(`${href}/`) || (href === "/ai" && path === "/chat");
 
 export function BottomNav({ labels }: { labels: NavLabels }) {
   const path = usePathname();
@@ -27,8 +27,8 @@ export function BottomNav({ labels }: { labels: NavLabels }) {
         aria-label="Main"
         className="glass fixed inset-x-0 bottom-0 z-40 mx-auto flex w-full max-w-[480px] items-end border-x-0 border-b-0 px-1 pb-[calc(env(safe-area-inset-bottom)+3.5rem)] md:hidden"
       >
-        {SECTIONS.map(({ href, key, icon: Icon }) => {
-          const on = active(path, href);
+        {[{ href: "/", key: "home", icon: Home } as const, ...SECTIONS].map(({ href, key, icon: Icon }) => {
+          const on = href === "/" ? path === "/" : active(path, href);
           return (
             <Link
               key={href}
