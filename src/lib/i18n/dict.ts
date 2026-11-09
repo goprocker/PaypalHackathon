@@ -88,6 +88,9 @@ const en = {
   "family.privacy.desc": "Choose how much of your spending the family can see.",
   "family.as": "Viewing as",
   "family.switch": "switch",
+  "chat.title": "Ask PayHub",
+  "chat.desc": "Answers come from your payments, Money, Track and Protect. Private items stay private.",
+  "chat.rules": "Rule-based answers from your payments, Money, Track and Protect. Private items stay private.",
 };
 export type Key = keyof typeof en;
 
@@ -176,6 +179,9 @@ const ta: Record<Key, string> = {
   "family.privacy.desc": "உங்கள் செலவில் எவ்வளவு குடும்பத்துக்குத் தெரியலாம் எனத் தேர்வுசெய்யுங்கள்.",
   "family.as": "பார்ப்பவர்",
   "family.switch": "மாற்று",
+  "chat.title": "PayHub இடம் கேளுங்கள்",
+  "chat.desc": "உங்கள் கட்டணங்கள், பணம், கண்காணி, பாதுகாப்பு பகுதிகளிலிருந்து பதில்கள். தனிப்பட்டவை தனிப்பட்டதாகவே இருக்கும்.",
+  "chat.rules": "உங்கள் கட்டணங்களிலிருந்து விதி அடிப்படையிலான பதில்கள். தனிப்பட்டவை தனிப்பட்டதாகவே இருக்கும்.",
 };
 
 const hi: Record<Key, string> = {
@@ -263,6 +269,9 @@ const hi: Record<Key, string> = {
   "family.privacy.desc": "चुनें कि परिवार आपके खर्च का कितना हिस्सा देखे।",
   "family.as": "देख रहे हैं",
   "family.switch": "बदलें",
+  "chat.title": "PayHub से पूछें",
+  "chat.desc": "जवाब आपके भुगतान, पैसा, ट्रैक और सुरक्षा से आते हैं। निजी आइटम निजी रहते हैं।",
+  "chat.rules": "आपके भुगतानों से नियम-आधारित जवाब। निजी आइटम निजी रहते हैं।",
 };
 
 export const DICTS: Record<Locale, Record<Key, string>> = { en, ta, hi };

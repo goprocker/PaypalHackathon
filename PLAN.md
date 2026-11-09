@@ -194,7 +194,7 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - Deploy: approved CLI `npx netlify deploy --build --prod` (do it in QA block).
 - Teammate's 33-feature list: proceed without it; cross-check when it arrives.
 
-**Next session: start Block 8 (Assistant).** Remaining blocks, in order (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
+**Next session: start Block 9 (Polish + QA).** Block 8 done: `src/lib/assistant.ts` (`TOOLS` over spending, family+privacy, problems, track_payment, duplicates, subscriptions, lrs, true_cost, check_safety; `ruleAnswer` with EN/TA/HI phrases + keywords), `chat()` in `chat.ts` uses Claude with those tools when `ANTHROPIC_API_KEY` set, else rules; `/chat` needs no sign-in, shows agents used + module links. Test `tests/assistant.test.ts`. Remaining blocks, in order (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
 3. ~~AI layer~~ done. Block 8 Assistant should call `src/lib/agents/agents.ts` functions as its tools.
 4. ~~Pay~~ done.
 5. ~~Protect~~ done.
