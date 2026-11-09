@@ -1,4 +1,4 @@
-import { ArrowUpRight, LayoutDashboard, MessageCircle, ScanSearch, Users } from "lucide-react";
+import { ArrowUpRight, LayoutDashboard, PlayCircle, MessageCircle, ScanSearch, Users } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { TagChip } from "@/components/badges";
@@ -72,12 +72,17 @@ function Dashboard({ data }: { data: NonNullable<Awaited<ReturnType<typeof famil
         </ul>
       </section>
 
+      <Link href="/demo" className="glass flex items-center gap-3 rounded-2xl p-4">
+        <PlayCircle aria-hidden className="size-6 text-accent" />
+        <span className="flex-1"><span className="block font-semibold">Demo Mode</span><span className="block text-sm text-muted">Load a ready-made scenario in one tap</span></span>
+        <ArrowUpRight aria-hidden className="size-4 text-muted" />
+      </Link>
       <section aria-labelledby="quick-h">
         <h2 id="quick-h" className="mb-3 text-base font-semibold">Quick actions</h2>
         <ul className="grid grid-cols-4 gap-3">
           {ACTIONS.map(({ href, label, icon: Icon }) => (
             <li key={label}>
-              <Link href={href} className="flex h-full min-h-24 flex-col items-center justify-center gap-2 rounded-2xl bg-surface px-1 py-3 text-center text-xs font-medium shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
+              <Link href={href} className="flex h-full min-h-24 flex-col items-center justify-center gap-2 glass rounded-2xl px-1 py-3 text-center text-xs font-medium shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
                 <Icon aria-hidden className="size-6 text-accent" />
                 {label}
               </Link>
@@ -126,6 +131,11 @@ function Welcome() {
         </div>
       </section>
 
+      <Link href="/demo" className="glass flex items-center gap-3 rounded-2xl p-4">
+        <PlayCircle aria-hidden className="size-6 text-accent" />
+        <span className="flex-1"><span className="block font-semibold">Demo Mode</span><span className="block text-sm text-muted">Load a ready-made scenario in one tap</span></span>
+        <ArrowUpRight aria-hidden className="size-4 text-muted" />
+      </Link>
       <figure className="rounded-2xl bg-surface p-5 shadow-[0_1px_2px_rgba(12,27,61,0.06)]">
         <figcaption className="flex items-baseline justify-between text-sm text-muted">
           <span>Wireless headphones, {formatUsd(EXAMPLE_CENTS)}</span>

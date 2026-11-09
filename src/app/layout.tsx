@@ -7,6 +7,8 @@ import { MockBadge } from "@/components/badges";
 import { BottomNav } from "@/components/bottom-nav";
 import { LangSwitch } from "@/components/lang-switch";
 import { PwaRegister } from "@/components/pwa-register";
+import { ExitScenario } from "@/components/scenario-picker";
+import { activeScenario } from "@/lib/demo/server";
 import { getUser } from "@/lib/db/queries";
 import { getT } from "@/lib/i18n/server";
 import { paypalMock } from "@/lib/paypal";
@@ -71,6 +73,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <TopBar />
           </Suspense>
           <Suspense fallback={null}>
+            <ScenarioBanner />
+          </Suspense>
+          <Suspense fallback={null}>
             <ModeBadges />
           </Suspense>
           <main className="flex-1 px-5 pt-2 pb-6">
@@ -88,6 +93,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <PwaRegister />
       </body>
     </html>
+  );
+}
+
+async function ScenarioBanner() {
+  const s = await activeScenario();
+  if (!s) return null;
+  return (
+    <div className="mx-5 mb-2 flex items-center gap-2 rounded-xl bg-accent/15 py-1 pr-1 pl-3 text-sm">
+      <span className="font-semibold text-accent">Demo</span>
+      <Link href={s.href} className="min-w-0 flex-1 truncate">{s.title}</Link>
+      <ExitScenario />
+    </div>
   );
 }
 
