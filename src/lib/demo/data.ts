@@ -155,7 +155,7 @@ export const SCENARIOS = [
   { id: "duplicate", title: "Charged twice", desc: "Broadband bill paid two times, 3 minutes apart.", href: "/money?focus=duplicates", focus: "s_dup2" },
   { id: "scam_qr", title: "Scam QR code", desc: "A 'refund desk' QR that actually asks you to pay.", href: "/protect?qr=scam", focus: null },
   { id: "family", title: "Family with private items", desc: "Mom and Dad share spending, private items stay hidden.", href: "/family", focus: null },
-  { id: "international", title: "Buying from abroad", desc: "USD 85 lamp: which way to pay costs least?", href: "/pay", focus: "s_forex" },
+  { id: "international", title: "Buying from abroad", desc: "USD 85 lamp: which way to pay costs least?", href: "/pay?tool=intl&price=85&cur=USD", focus: "s_forex" },
 ] as const;
 
 export type ScenarioId = (typeof SCENARIOS)[number]["id"];

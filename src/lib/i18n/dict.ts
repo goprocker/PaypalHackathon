@@ -39,6 +39,15 @@ const en = {
   "cc.answer": "Assistant says",
   "cc.idle": "Not used",
   "cc.ran": "Worked",
+  "pay.copilot": "Checkout Copilot",
+  "pay.router": "Smart Router",
+  "pay.intl": "International",
+  "pay.large": "Large payment",
+  "pay.copilot.desc": "Check a foreign store, its true rupee cost and a verdict, then pay with PayPal sandbox.",
+  "pay.router.desc": "Compare UPI, card, PayPal and forex card: which works here, the fees and the final cost.",
+  "pay.intl.desc": "Rate, bank markup, shipping, customs duty and GST, added up to one rupee total.",
+  "pay.large.desc": "UPI, IMPS, NEFT and RTGS limits and fees, plus checks on who you are paying.",
+  "pay.signin": "Sign in to the demo family to use Checkout Copilot.",
 };
 export type Key = keyof typeof en;
 
@@ -78,6 +87,15 @@ const ta: Record<Key, string> = {
   "cc.answer": "உதவியாளர் சொல்வது",
   "cc.idle": "பயன்படுத்தப்படவில்லை",
   "cc.ran": "செயல்பட்டது",
+  "pay.copilot": "செக்அவுட் உதவி",
+  "pay.router": "சிறந்த வழி",
+  "pay.intl": "வெளிநாடு",
+  "pay.large": "பெரிய தொகை",
+  "pay.copilot.desc": "வெளிநாட்டு கடையை சரிபார்த்து, உண்மையான ரூபாய் செலவும் தீர்ப்பும் பார்த்து, PayPal சாண்ட்பாக்ஸில் செலுத்துங்கள்.",
+  "pay.router.desc": "UPI, கார்டு, PayPal, ஃபாரெக்ஸ் கார்டு: எது இங்கே வேலை செய்யும், கட்டணம், இறுதி செலவு.",
+  "pay.intl.desc": "மாற்று விகிதம், வங்கி கூடுதல், அனுப்புதல், சுங்க வரி, GST சேர்த்து ஒரே ரூபாய் தொகை.",
+  "pay.large.desc": "UPI, IMPS, NEFT, RTGS வரம்புகள், கட்டணங்கள், யாருக்கு செலுத்துகிறீர்கள் என்ற சரிபார்ப்பு.",
+  "pay.signin": "செக்அவுட் உதவியைப் பயன்படுத்த டெமோ குடும்பத்தில் உள்நுழையுங்கள்.",
 };
 
 const hi: Record<Key, string> = {
@@ -116,6 +134,15 @@ const hi: Record<Key, string> = {
   "cc.answer": "सहायक कहता है",
   "cc.idle": "उपयोग नहीं हुआ",
   "cc.ran": "काम किया",
+  "pay.copilot": "चेकआउट कोपायलट",
+  "pay.router": "स्मार्ट राउटर",
+  "pay.intl": "अंतरराष्ट्रीय",
+  "pay.large": "बड़ा भुगतान",
+  "pay.copilot.desc": "विदेशी स्टोर, असली रुपये की लागत और फ़ैसला देखें, फिर PayPal सैंडबॉक्स से भुगतान करें।",
+  "pay.router.desc": "UPI, कार्ड, PayPal और फ़ॉरेक्स कार्ड की तुलना: कौन सा चलेगा, फ़ीस और कुल लागत।",
+  "pay.intl.desc": "दर, बैंक मार्कअप, शिपिंग, कस्टम ड्यूटी और GST जोड़कर एक रुपये का कुल।",
+  "pay.large.desc": "UPI, IMPS, NEFT और RTGS की सीमाएँ और फ़ीस, और पाने वाले की जाँच।",
+  "pay.signin": "चेकआउट कोपायलट के लिए डेमो परिवार में साइन इन करें।",
 };
 
 export const DICTS: Record<Locale, Record<Key, string>> = { en, ta, hi };
