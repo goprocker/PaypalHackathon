@@ -172,7 +172,8 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 - **Block 2 Demo Mode** (`50c5212`): `src/lib/demo/data.ts` = 58 payments (Arun/Mom/Dad) with method, txnId, payee VPA, status, private flag; scenario rows `s_failed`, `s_refund`, `s_refunded`, `s_dup1/2`, `s_pending`, `s_forex`, `s_rejected`; `SCAM_QR` / `SAFE_QR`; six `SCENARIOS` with target hrefs (`/track?txn=…`, `/money?focus=duplicates`, `/protect?qr=scam`, `/family`, `/pay`). `POST /api/demo` sets cookie `payhub_scenario` (auto-signs in as `u_me`), `activeScenario()` in `src/lib/demo/server.ts`, `/demo` page with picker, banner + exit in layout, Demo Mode link on Home. Test `tests/demo.test.ts`.
 - **Block 3 AI layer**: `src/lib/agents/log.ts` (`ActivityLog`, `AGENTS`, `AGENT_INFO`, event kinds start/result/handoff/warn/block), `agents.ts` (Fraud QR/link/collect, FX cost, Budget + `findDuplicates`, Router blocks unsafe methods, Verdict via `ruleVerdict`, simulated Payment, Tracker with refund ETA + "Don't pay again", Proof, Dispute draft, Assistant explain), `workflows.ts` (`runWorkflow(id, {usdInr, now})` for scam_qr, safe_qr, international, failed, refund, duplicate, family). Command Centre at `/ai/command?run=<id>` (defaults to active scenario), linked from `/ai` as Interactive demo. `cc.*` strings in EN/TA/HI. Test `tests/agents.test.ts`. International lamp correctly gets NOT WORTH IT (Shopping 157%), so Payment holds it.
 - **Block 4 Pay**: `src/lib/pay.ts` (Zod inputs + `intlCost`, `smartRoute`, `largeCheck`, `RAILS` limits/fees, `zodMessages`), `getInrRates()` in `fx.ts` (USD/EUR/GBP/SGD/AUD, Frankfurter, fallback table), client tools in `src/components/pay/tools.tsx`, `/pay?tool=copilot|router|intl|large` tabs with status labels (Copilot needs sign-in, others don't). Router: `?risky=1` pre-flags payee. International scenario now opens `/pay?tool=intl&price=85&cur=USD`. Limits used: UPI ₹1L (₹5L tax/hospital/education), new UPI payee ₹5k first 24h, IMPS ₹5L, RTGS min ₹2L; all labelled as typical, bank may differ. Test `tests/pay.test.ts`.
-- Checks: 53 tests, typecheck, `npx eslint src tests`, `next build` all pass. Verified by curl on `next start`, NOT visually in a browser yet.
+- **Block 5 Protect**: `src/lib/protect.ts` (`parseUpi`, `checkQr` via Fraud agent, `checkPaymentLink` for https + upi links: shorteners, @ tricks, .apk, lure words; `COLLECT_REQUESTS` + `judgeCollect`; `merchantTrust` for website or UPI ID using payment history; `OTP_QUIZ`). UI `src/components/protect/tools.tsx`; `/protect?tool=link|qr|collect|otp|trust`, `?qr=scam|safe` opens QR tab with result. QR: image upload + camera, both decoded with `jsqr@1.4.0` (new dep) on a canvas; jsQR decode of the scam payload verified in node. High-risk results link to `/pay?tool=router&risky=1`. Test `tests/protect.test.ts`. Camera path not tried on a real phone.
+- Checks: 58 tests, typecheck, `npx eslint src tests`, `next build` all pass. Verified by curl on `next start`, NOT visually in a browser yet.
 - Nothing pushed, nothing deployed since `3ddf02e`.
 
 **Decisions from user (2026-11-09)**
@@ -182,8 +183,8 @@ Next.js + TS + Tailwind (skip shadcn unless quick), Recharts, Zod, libSQL/Drizzl
 
 **Remaining blocks, in order** (target screens must read `DEMO_PAYMENTS` and honour scenario query params)
 3. ~~AI layer~~ done. Block 8 Assistant should call `src/lib/agents/agents.ts` functions as its tools.
-4. ~~Pay~~ done. Not yet: Protect could link to `/pay?tool=router&risky=1`.
-5. Protect: link checker, QR scan (upload + camera), collect-request simulator, OTP quiz, Merchant Trust Score; `?qr=scam` triggers warnings.
+4. ~~Pay~~ done.
+5. ~~Protect~~ done.
 6. Track: Payment Tracker (`?txn=`), Proof Vault, dispute draft + PDF, "Don't pay again".
 7. Money + Family: duplicates (`?focus=duplicates`), subscriptions, budgets, goals, net worth, LRS; per-member privacy settings.
 8. Assistant: chat with tools over all modules, replies in 3 languages (rule-based now).

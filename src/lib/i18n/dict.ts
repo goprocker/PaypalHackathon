@@ -48,6 +48,16 @@ const en = {
   "pay.intl.desc": "Rate, bank markup, shipping, customs duty and GST, added up to one rupee total.",
   "pay.large.desc": "UPI, IMPS, NEFT and RTGS limits and fees, plus checks on who you are paying.",
   "pay.signin": "Sign in to the demo family to use Checkout Copilot.",
+  "protect.link": "Link checker",
+  "protect.qr": "QR scan",
+  "protect.collect": "Collect requests",
+  "protect.otp": "OTP quiz",
+  "protect.trust": "Trust score",
+  "protect.link.desc": "Paste a link and see red flags before you open it.",
+  "protect.qr.desc": "Upload or scan a QR code to see who really gets paid.",
+  "protect.collect.desc": "Practise spotting UPI collect requests that take money instead of sending it.",
+  "protect.otp.desc": "Five quick questions on the tricks scammers use.",
+  "protect.trust.desc": "How safe a shop or UPI ID looks, and why.",
 };
 export type Key = keyof typeof en;
 
@@ -96,6 +106,16 @@ const ta: Record<Key, string> = {
   "pay.intl.desc": "மாற்று விகிதம், வங்கி கூடுதல், அனுப்புதல், சுங்க வரி, GST சேர்த்து ஒரே ரூபாய் தொகை.",
   "pay.large.desc": "UPI, IMPS, NEFT, RTGS வரம்புகள், கட்டணங்கள், யாருக்கு செலுத்துகிறீர்கள் என்ற சரிபார்ப்பு.",
   "pay.signin": "செக்அவுட் உதவியைப் பயன்படுத்த டெமோ குடும்பத்தில் உள்நுழையுங்கள்.",
+  "protect.link": "இணைப்பு சோதனை",
+  "protect.qr": "QR ஸ்கேன்",
+  "protect.collect": "கலெக்ட் கோரிக்கைகள்",
+  "protect.otp": "OTP வினாடி வினா",
+  "protect.trust": "நம்பக மதிப்பெண்",
+  "protect.link.desc": "இணைப்பைத் திறக்கும் முன் ஒட்டி, அபாய அறிகுறிகளைப் பாருங்கள்.",
+  "protect.qr.desc": "QR-ஐ பதிவேற்றி அல்லது ஸ்கேன் செய்து, உண்மையில் யாருக்குப் பணம் போகிறது என்று பாருங்கள்.",
+  "protect.collect.desc": "பணம் அனுப்புவதற்குப் பதிலாக எடுக்கும் UPI கலெக்ட் கோரிக்கைகளைக் கண்டறியப் பழகுங்கள்.",
+  "protect.otp.desc": "மோசடியாளர்களின் தந்திரங்கள் பற்றி ஐந்து விரைவு கேள்விகள்.",
+  "protect.trust.desc": "ஒரு கடை அல்லது UPI ID எவ்வளவு பாதுகாப்பானது, ஏன்.",
 };
 
 const hi: Record<Key, string> = {
@@ -143,6 +163,16 @@ const hi: Record<Key, string> = {
   "pay.intl.desc": "दर, बैंक मार्कअप, शिपिंग, कस्टम ड्यूटी और GST जोड़कर एक रुपये का कुल।",
   "pay.large.desc": "UPI, IMPS, NEFT और RTGS की सीमाएँ और फ़ीस, और पाने वाले की जाँच।",
   "pay.signin": "चेकआउट कोपायलट के लिए डेमो परिवार में साइन इन करें।",
+  "protect.link": "लिंक जाँच",
+  "protect.qr": "QR स्कैन",
+  "protect.collect": "कलेक्ट अनुरोध",
+  "protect.otp": "OTP क्विज़",
+  "protect.trust": "भरोसा स्कोर",
+  "protect.link.desc": "खोलने से पहले लिंक पेस्ट करें और खतरे के संकेत देखें।",
+  "protect.qr.desc": "QR अपलोड या स्कैन करें और देखें कि पैसा असल में किसे जाता है।",
+  "protect.collect.desc": "पैसा भेजने की जगह पैसा लेने वाले UPI कलेक्ट अनुरोध पहचानने का अभ्यास करें।",
+  "protect.otp.desc": "ठगों की चालों पर पाँच छोटे सवाल।",
+  "protect.trust.desc": "कोई दुकान या UPI ID कितनी सुरक्षित लगती है, और क्यों।",
 };
 
 export const DICTS: Record<Locale, Record<Key, string>> = { en, ta, hi };
